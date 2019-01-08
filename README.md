@@ -21,3 +21,27 @@ Have you ever opened the refridgerator door, just to have a flurry of postit not
 - Wishlist/ Remember to remember list
 - Honey do list requests made to individual family members
 - Family message board, individual messaging
+
+**Pages**
+Landing Page
+Login
+Register
+Create/ Update Family
+Parent Homepage
+Child Homepage
+Manage Chores
+**Opt**
+Grocery List
+
+**Other technologies**
+MomentJS
+react-calendar
+react-color wheel (stretch goal)
+
+**Tables Needed**
+family members
+chore list
+chore instance
+pets
+grocery
+events
