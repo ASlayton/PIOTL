@@ -18,4 +18,6 @@ Have you ever opened the refridgerator door, just to have a flurry of postit not
 **Stretch Goals**
 - Add items to grocery list
 - Child has ability to request items to be added to grocery list
+- Wishlist/ Remember to remember list
+- Honey do list requests made to individual family members
 - Family message board, individual messaging
