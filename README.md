@@ -43,6 +43,6 @@ Have you ever opened the refridgerator door, just to have a flurry of postit not
 - family members
 - chore list
 - chore instance
-- pets
 - grocery
 - events
+- memo
