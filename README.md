@@ -1,6 +1,6 @@
 # PIOTL
 ## PUT IT ON THE LIST
-I don't know about you, but there are never enough magnets on the fridge door to hold all of the notes to self, doctor appointment cards, scraps of grocery lists, etc, and that chore assignment wheel just doesn't cut it (certain kids are just plain sneaky!). Things are always disappearing, intentionally or otherwise and it is impossible to keep up with who is supposed to do what and when. This app fixes all of that by having a central location for all of those chore assignments, appointments, memos, and lists.
+I don't know about you, but there are never enough magnets on the fridge door to hold all of the notes to self, doctor appointment cards, scraps of grocery lists, etc, and that chore assignment wheel just doesn't cut it (certain kids are just plain sneaky!). Things are always disappearing, intentionally or otherwise and it is impossible to keep up with who is supposed to do what and when. This app fixes all of that by having a central location for all of those chore assignments, appointments, memos, and lists for the entire family as well as individually.
 
 **Goals:**
 - Individual Login into the family page
