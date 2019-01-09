@@ -1,6 +1,6 @@
 # PIOTL
 ## PUT IT ON THE LIST
-Have you ever opened the refrigerator door, just to have a flurry of postit notes fly off and over-burdened magnets slowly slip down until they eventually make thier way under the refrigerator? You probably have an over-abundance of honey-do's and remnants of grocery lists that you will not find until long after they are no longer relevant. Look no further, there is now an app for that. Just sign in, create your family profile, and you will have room for all of those pictures that always seem to be disappearing.
+I don't know about you, but there are never enough magnets on the fridge door to hold all of the notes to self, doctor appointment cards, scraps of grocery lists, etc, and that chore assignment wheel just doesn't cut it (certain kids are just plain sneaky!). Things are always disappearing, intentionally or otherwise and it is impossible to keep up with who is supposed to do what and when. This app fixes all of that by having a central location for all of those chore assignments, appointments, memos, and lists.
 
 **Goals:**
 - Individual Login into the family page
