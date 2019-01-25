@@ -1,0 +1,14 @@
+C:\Users\alsla\workspace\PIOTL\PIOTL\PIOTL\bin\Debug\netcoreapp2.1\PIOTL.deps.json
+C:\Users\alsla\workspace\PIOTL\PIOTL\PIOTL\bin\Debug\netcoreapp2.1\PIOTL.runtimeconfig.json
+C:\Users\alsla\workspace\PIOTL\PIOTL\PIOTL\bin\Debug\netcoreapp2.1\PIOTL.runtimeconfig.dev.json
+C:\Users\alsla\workspace\PIOTL\PIOTL\PIOTL\bin\Debug\netcoreapp2.1\PIOTL.dll
+C:\Users\alsla\workspace\PIOTL\PIOTL\PIOTL\obj\Debug\netcoreapp2.1\PIOTL.csprojAssemblyReference.cache
+C:\Users\alsla\workspace\PIOTL\PIOTL\PIOTL\obj\Debug\netcoreapp2.1\PIOTL.csproj.CoreCompileInputs.cache
+C:\Users\alsla\workspace\PIOTL\PIOTL\PIOTL\obj\Debug\netcoreapp2.1\PIOTL.RazorAssemblyInfo.cache
+C:\Users\alsla\workspace\PIOTL\PIOTL\PIOTL\obj\Debug\netcoreapp2.1\PIOTL.RazorAssemblyInfo.cs
+C:\Users\alsla\workspace\PIOTL\PIOTL\PIOTL\obj\Debug\netcoreapp2.1\PIOTL.AssemblyInfoInputs.cache
+C:\Users\alsla\workspace\PIOTL\PIOTL\PIOTL\obj\Debug\netcoreapp2.1\PIOTL.AssemblyInfo.cs
+C:\Users\alsla\workspace\PIOTL\PIOTL\PIOTL\obj\Debug\netcoreapp2.1\PIOTL.RazorTargetAssemblyInfo.cache
+C:\Users\alsla\workspace\PIOTL\PIOTL\PIOTL\bin\Debug\netcoreapp2.1\PIOTL.pdb
+C:\Users\alsla\workspace\PIOTL\PIOTL\PIOTL\obj\Debug\netcoreapp2.1\PIOTL.dll
+C:\Users\alsla\workspace\PIOTL\PIOTL\PIOTL\obj\Debug\netcoreapp2.1\PIOTL.pdb
