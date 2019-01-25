@@ -16,8 +16,9 @@
     "build-js": "react-scripts build",
     "start": "npm-run-all -p watch-css start-js",
     "build": "npm-run-all build-css build-js",
-    "eject": "react-scripts eject"
- },
+    "eject": "react-scripts eject",
+    "deploy": "npm run && firebase deploy"
+  },
   "eslintConfig": {
     "extends": "react-app"
   },
@@ -26,5 +27,9 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "devDependencies": {
+    "grunt-contrib-clean": "^2.0.0",
+    "grunt-contrib-copy": "^1.0.0"
+  }
 }
