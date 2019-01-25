@@ -1,3 +1,5 @@
+use PIOTL;
+
 CREATE TABLE Users 
 (
 	id int IDENTITY(1,1) PRIMARY KEY,
@@ -5,7 +7,7 @@ CREATE TABLE Users
 	lastName varchar(20),
 	firebaseId varchar(255),
 	familyId int,
-	adult bool,
+	adult bit,
 	earned decimal(6,2)
 );
 
@@ -40,7 +42,7 @@ CREATE TABLE ChoresList
 	id int IDENTITY(1,1) PRIMARY KEY,
 	dateAssigned datetime,
 	dateDue datetime,
-	completed bool,
+	completed bit,
 	assignedTo int,
 	assignedBy int
 );
@@ -78,7 +80,7 @@ CREATE TABLE Grocery
 	type int,
 	quantity int,
 	addedBy int,
-	approved bool,
+	approved bit,
 	dateAdded datetime
 );
 
@@ -127,20 +129,14 @@ CREATE TABLE Rooms
 insert into Rooms (name)
 VALUES ('Laundry Room')
 
-ALTER TABLE ChoresList ADD FOREIGN KEY (assignedTo) REFERENCES Users (id);
-
-ALTER TABLE ChoresList ADD FOREIGN KEY (assignedBy) REFERENCES Users (id);
-
 ALTER TABLE Users ADD FOREIGN KEY (familyId) REFERENCES Family (id);
-
-ALTER TABLE Memos ADD FOREIGN KEY (userId) REFERENCES Users (id);
-
-ALTER TABLE Messages ADD FOREIGN KEY (sentTo) REFERENCES Users (id);
-
-ALTER TABLE Messages ADD FOREIGN KEY (sentFrom) REFERENCES Users (id);
-
-ALTER TABLE Grocery ADD FOREIGN KEY (addedBy) REFERENCES Users (id);
-
-ALTER TABLE Events ADD FOREIGN KEY (assignedTo) REFERENCES Users (id);
-
 ALTER TABLE Chores ADD FOREIGN KEY (room) REFERENCES Rooms (id);
+ALTER TABLE ChoresList ADD FOREIGN KEY (assignedTo) REFERENCES Users (id);
+ALTER TABLE ChoresList ADD FOREIGN KEY (assignedBy) REFERENCES Users (id);
+ALTER TABLE Memos ADD FOREIGN KEY (userId) REFERENCES Users (id);
+ALTER TABLE Messages ADD FOREIGN KEY (sentTo) REFERENCES Users (id);
+ALTER TABLE Messages ADD FOREIGN KEY (sentFrom) REFERENCES Users (id);
+ALTER TABLE Grocery ADD FOREIGN KEY (addedBy) REFERENCES Users (id);
+ALTER TABLE Grocery ADD FOREIGN KEY (type) REFERENCES GroceryType (id);
+ALTER TABLE Events ADD FOREIGN KEY (type) REFERENCES EventType (id);
+ALTER TABLE Events ADD FOREIGN KEY (assignedTo) REFERENCES Users (id);
