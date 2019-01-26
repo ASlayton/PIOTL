@@ -12536,11 +12536,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\alsla\\workspace\\PIOTL\\PIOTL\\PIOTL\\PIOTL.csproj",
+      "projectUniqueName": "C:\\Users\\alsla\\workspace\\PIOTL\\PIOTL-Backend\\PIOTL\\PIOTL.csproj",
       "projectName": "PIOTL",
-      "projectPath": "C:\\Users\\alsla\\workspace\\PIOTL\\PIOTL\\PIOTL\\PIOTL.csproj",
+      "projectPath": "C:\\Users\\alsla\\workspace\\PIOTL\\PIOTL-Backend\\PIOTL\\PIOTL.csproj",
       "packagesPath": "C:\\Users\\alsla\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\alsla\\workspace\\PIOTL\\PIOTL\\PIOTL\\obj\\",
+      "outputPath": "C:\\Users\\alsla\\workspace\\PIOTL\\PIOTL-Backend\\PIOTL\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
