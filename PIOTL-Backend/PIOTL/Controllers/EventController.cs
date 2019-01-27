@@ -7,7 +7,7 @@ using PIOTL.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace BangazonInc.Controllers
+namespace PIOTL.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
