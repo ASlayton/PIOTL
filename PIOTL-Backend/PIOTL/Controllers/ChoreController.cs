@@ -14,18 +14,18 @@ namespace PIOTL.Controllers
     public class ChoreController : ControllerBase
     {
         DatabaseInterface _db;
-        ChoreStorage _Chore;
+        ChoreAccess _Chore;
 
         public ChoreController(DatabaseInterface db)
         {
             _db = db;
-            _Chore = new ChoreStorage(db);
+            _Chore = new ChoreAccess(db);
         }
 
         [HttpGet]
-        public IActionResult GetAll()
+        public IActionResult GetAllChores()
         {
-            var allChores = _Chore.GetChore();
+            var allChores = _Chore.GetAllChores();
             return Ok(allChores);
         }
 
@@ -63,11 +63,9 @@ namespace PIOTL.Controllers
         }
 
         [HttpPost("Chore")]
-        public async Task<ActionResult<Chore>> PostChore(ChoreWithEmployeeId Chore)
+        public async Task<ActionResult<Chore>> PostChore(Chore Chore)
         {
-            return Chore.EmployeeId is null
-                ? Ok(await _Chore.PostChore(Chore))
-                : Ok(await _Chore.PostChoreAndAssignToEmployee(Chore));
+            return Ok(await _Chore.PostChore(Chore));
         }
     }
 }

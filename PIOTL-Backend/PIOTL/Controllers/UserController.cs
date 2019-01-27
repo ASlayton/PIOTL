@@ -14,12 +14,12 @@ namespace PIOTL.Controllers
     public class UserController : ControllerBase
     {
         DatabaseInterface _db;
-        UserStorage _User;
+        UserAccess _User;
 
         public UserController(DatabaseInterface db)
         {
             _db = db;
-            _User = new UserStorage(db);
+            _User = new UserAccess(db);
         }
 
         [HttpGet]
@@ -63,11 +63,9 @@ namespace PIOTL.Controllers
         }
 
         [HttpPost("User")]
-        public async Task<ActionResult<User>> PostUser(UserWithEmployeeId User)
+        public async Task<ActionResult<User>> PostUser(User User)
         {
-            return User.EmployeeId is null
-                ? Ok(await _User.PostUser(User))
-                : Ok(await _User.PostUserAndAssignToEmployee(User));
+            return Ok(await _User.PostUser(User));
         }
     }
 }

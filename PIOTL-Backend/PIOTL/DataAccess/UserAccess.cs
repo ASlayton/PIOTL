@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 using PIOTL.Models;
+using Dapper;
 
 
 namespace PIOTL.DataAccess
@@ -53,27 +54,14 @@ namespace PIOTL.DataAccess
             using (var db = _db.GetConnection())
             {
                 var sql = db.Execute(@"UPDATE [dbo].[Users]
-                                       SET [purchasedAt] = @purchasedAt
-                                          ,[decommissionedAt] = @decommissionedAt
-                                          ,[isNew] = @isNew
-                                          ,[isWorking] = @isWorking
-                                          ,[Make] = @make
-                                          ,[Model] = @model
+                                       SET [firstName] = @firstName
+                                          ,[lastName] = @lastName
+                                          ,[firebaseId] = @firebaseId
+                                          ,[FamilyId] = @familyId
+                                          ,[Adult] = @adult
+                                          ,[Earned] = @earned
                                             Where Id = @id", User);
                 return sql == 1;
-            }
-        }
-
-        public async Task<UserWithEmployeeId> PostUserAndAssignToEmployee(UserWithEmployeeId User)
-        {
-            var insertedUser = new UserWithEmployeeId(await PostUser(User));
-            using (var db = _db.GetConnection())
-            {
-                var updated = db.Execute(@"UPDATE Employees
-                                            SET UserId = @UserId
-                                            WHERE id = @EmployeeId", new { UserId = insertedUser.Id, User.EmployeeId });
-                if (updated == 1) insertedUser.EmployeeId = User.EmployeeId;
-                return insertedUser;
             }
         }
 
@@ -87,12 +75,12 @@ namespace PIOTL.DataAccess
                 
                                  OUTPUT INSERTED.*
                                  VALUES
-                                       (@purchasedAt
-                                       ,@decommissionedAt
-                                       ,@isNew
-                                       ,@isWorking
-                                       ,@make
-                                       ,@model)", User);
+                                       (@firstName
+                                       ,@lastName
+                                       ,@firebaseId
+                                       ,@familyId
+                                       ,@Adult
+                                       ,@Earned)", User);
 
             }
         }

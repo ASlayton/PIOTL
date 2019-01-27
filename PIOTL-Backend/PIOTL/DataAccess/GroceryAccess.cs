@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 using PIOTL.Models;
+using Dapper;
 
 
 namespace PIOTL.DataAccess
@@ -17,7 +18,7 @@ namespace PIOTL.DataAccess
 
         //Get all Grocerys
 
-        public List<Grocery> GetGrocery()
+        public List<Grocery> GetAllGrocery()
         {
             using (var db = _db.GetConnection())
             {
@@ -52,28 +53,14 @@ namespace PIOTL.DataAccess
         {
             using (var db = _db.GetConnection())
             {
-                var sql = db.Execute(@"UPDATE [dbo].[Grocerys]
-                                       SET [purchasedAt] = @purchasedAt
-                                          ,[decommissionedAt] = @decommissionedAt
-                                          ,[isNew] = @isNew
-                                          ,[isWorking] = @isWorking
-                                          ,[Make] = @make
-                                          ,[Model] = @model
-                                            Where Id = @id", Grocery);
+                var sql = db.Execute(@"UPDATE [dbo].[Grocery]
+                                       SET [name] = @name
+                                          ,[type] = @type
+                                          ,[Quantity] = @quantity
+                                          ,[AddedBy] = @addedBy
+                                          ,[Approved] = @approved
+                                          ,[DateAdded] = @dateAdded", Grocery);
                 return sql == 1;
-            }
-        }
-
-        public async Task<GroceryWithEmployeeId> PostGroceryAndAssignToEmployee(GroceryWithEmployeeId Grocery)
-        {
-            var insertedGrocery = new GroceryWithEmployeeId(await PostGrocery(Grocery));
-            using (var db = _db.GetConnection())
-            {
-                var updated = db.Execute(@"UPDATE Employees
-                                            SET GroceryId = @GroceryId
-                                            WHERE id = @EmployeeId", new { GroceryId = insertedGrocery.Id, Grocery.EmployeeId });
-                if (updated == 1) insertedGrocery.EmployeeId = Grocery.EmployeeId;
-                return insertedGrocery;
             }
         }
 
@@ -87,12 +74,12 @@ namespace PIOTL.DataAccess
                 
                                  OUTPUT INSERTED.*
                                  VALUES
-                                       (@purchasedAt
-                                       ,@decommissionedAt
-                                       ,@isNew
-                                       ,@isWorking
-                                       ,@make
-                                       ,@model)", Grocery);
+                                       (@name
+                                       ,@type
+                                       ,@quantity
+                                       ,@addedBy
+                                       ,@Approved
+                                       ,@DateAdded)", Grocery);
 
             }
         }

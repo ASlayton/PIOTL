@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Dapper;
 using PIOTL.Models;
-
 
 namespace PIOTL.DataAccess
 {
@@ -17,7 +17,7 @@ namespace PIOTL.DataAccess
 
         //Get all Events
 
-        public List<Event> GetEvent()
+        public List<Event> GetAllEvents()
         {
             using (var db = _db.GetConnection())
             {
@@ -27,11 +27,11 @@ namespace PIOTL.DataAccess
         }
 
         // Get Single Event 
-        public Event GetEventById(int EventId)
+        public Event GetEventById(int Id)
         {
             using (var db = _db.GetConnection())
             {
-                var sql = db.QueryFirstOrDefault<Event>(@"SELECT * From Events Where Id = @id", new { id = EventId });
+                var sql = db.QueryFirstOrDefault<Event>(@"SELECT * From Events Where Id = @id", new { id = Id });
                 return sql;
             }
         }
@@ -53,27 +53,15 @@ namespace PIOTL.DataAccess
             using (var db = _db.GetConnection())
             {
                 var sql = db.Execute(@"UPDATE [dbo].[Events]
-                                       SET [purchasedAt] = @purchasedAt
-                                          ,[decommissionedAt] = @decommissionedAt
-                                          ,[isNew] = @isNew
-                                          ,[isWorking] = @isWorking
-                                          ,[Make] = @make
-                                          ,[Model] = @model
+                                       SET [Name] = @name
+                                          ,[Type] = @type
+                                          ,[description] = @description
+                                          ,[AssignedTo] = @assignedTo
+                                          ,[DateDue] = @dateDue
+                                          ,[TimeStart] = @timeStart
+                                          ,[TimeEnd] = @timeEnd
                                             Where Id = @id", Event);
                 return sql == 1;
-            }
-        }
-
-        public async Task<EventWithEmployeeId> PostEventAndAssignToEmployee(EventWithEmployeeId Event)
-        {
-            var insertedEvent = new EventWithEmployeeId(await PostEvent(Event));
-            using (var db = _db.GetConnection())
-            {
-                var updated = db.Execute(@"UPDATE Employees
-                                            SET EventId = @EventId
-                                            WHERE id = @EmployeeId", new { EventId = insertedEvent.Id, Event.EmployeeId });
-                if (updated == 1) insertedEvent.EmployeeId = Event.EmployeeId;
-                return insertedEvent;
             }
         }
 
@@ -87,12 +75,14 @@ namespace PIOTL.DataAccess
                 
                                  OUTPUT INSERTED.*
                                  VALUES
-                                       (@purchasedAt
-                                       ,@decommissionedAt
-                                       ,@isNew
-                                       ,@isWorking
-                                       ,@make
-                                       ,@model)", Event);
+                                       (@name
+                                       ,@type
+                                       ,@description
+                                       ,@assignedTo
+                                       ,@dateDue
+                                       ,@timeStart
+                                       ,@timeEnd
+                                  )", Event);
 
             }
         }

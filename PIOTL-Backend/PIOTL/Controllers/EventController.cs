@@ -14,18 +14,18 @@ namespace PIOTL.Controllers
     public class EventController : ControllerBase
     {
         DatabaseInterface _db;
-        EventStorage _Event;
+        EventAccess _Event;
 
         public EventController(DatabaseInterface db)
         {
             _db = db;
-            _Event = new EventStorage(db);
+            _Event = new EventAccess(db);
         }
 
         [HttpGet]
-        public IActionResult GetAll()
+        public IActionResult GetAllEvents()
         {
-            var allEvents = _Event.GetEvent();
+            var allEvents = _Event.GetAllEvents();
             return Ok(allEvents);
         }
 
@@ -63,11 +63,9 @@ namespace PIOTL.Controllers
         }
 
         [HttpPost("Event")]
-        public async Task<ActionResult<Event>> PostEvent(EventWithEmployeeId Event)
+        public async Task<ActionResult<Event>> PostEvent(Event Event)
         {
-            return Event.EmployeeId is null
-                ? Ok(await _Event.PostEvent(Event))
-                : Ok(await _Event.PostEventAndAssignToEmployee(Event));
+            return Ok(await _Event.PostEvent(Event));
         }
     }
 }

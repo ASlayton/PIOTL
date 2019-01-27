@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 using PIOTL.Models;
+using Dapper;
 
 
 namespace PIOTL.DataAccess
@@ -53,27 +54,12 @@ namespace PIOTL.DataAccess
             using (var db = _db.GetConnection())
             {
                 var sql = db.Execute(@"UPDATE [dbo].[Messages]
-                                       SET [purchasedAt] = @purchasedAt
-                                          ,[decommissionedAt] = @decommissionedAt
-                                          ,[isNew] = @isNew
-                                          ,[isWorking] = @isWorking
-                                          ,[Make] = @make
-                                          ,[Model] = @model
+                                       SET [sentFrom] = @sentFrom
+                                          ,[sentTo] = @sentTo
+                                          ,[Messages] = @messages
+                                          ,[dateCreated] = @dateCreated
                                             Where Id = @id", Message);
                 return sql == 1;
-            }
-        }
-
-        public async Task<MessageWithEmployeeId> PostMessageAndAssignToEmployee(MessageWithEmployeeId Message)
-        {
-            var insertedMessage = new MessageWithEmployeeId(await PostMessage(Message));
-            using (var db = _db.GetConnection())
-            {
-                var updated = db.Execute(@"UPDATE Employees
-                                            SET MessageId = @MessageId
-                                            WHERE id = @EmployeeId", new { MessageId = insertedMessage.Id, Message.EmployeeId });
-                if (updated == 1) insertedMessage.EmployeeId = Message.EmployeeId;
-                return insertedMessage;
             }
         }
 
@@ -87,12 +73,10 @@ namespace PIOTL.DataAccess
                 
                                  OUTPUT INSERTED.*
                                  VALUES
-                                       (@purchasedAt
-                                       ,@decommissionedAt
-                                       ,@isNew
-                                       ,@isWorking
-                                       ,@make
-                                       ,@model)", Message);
+                                       (@sentFrom
+                                       ,@sentTo
+                                       ,@Messages
+                                       ,@DateCreated)", Message);
 
             }
         }

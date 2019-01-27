@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 using PIOTL.Models;
+using Dapper;
 
 
 namespace PIOTL.DataAccess
@@ -17,7 +18,7 @@ namespace PIOTL.DataAccess
 
         //Get all Memos
 
-        public List<Memo> GetMemo()
+        public List<Memo> GetAllMemos()
         {
             using (var db = _db.GetConnection())
             {
@@ -53,27 +54,11 @@ namespace PIOTL.DataAccess
             using (var db = _db.GetConnection())
             {
                 var sql = db.Execute(@"UPDATE [dbo].[Memos]
-                                       SET [purchasedAt] = @purchasedAt
-                                          ,[decommissionedAt] = @decommissionedAt
-                                          ,[isNew] = @isNew
-                                          ,[isWorking] = @isWorking
-                                          ,[Make] = @make
-                                          ,[Model] = @model
+                                       SET [UserId] = @userId
+                                          ,[Message] = @message
+                                          ,[DateCreated] = @dateCreated
                                             Where Id = @id", Memo);
                 return sql == 1;
-            }
-        }
-
-        public async Task<MemoWithEmployeeId> PostMemoAndAssignToEmployee(MemoWithEmployeeId Memo)
-        {
-            var insertedMemo = new MemoWithEmployeeId(await PostMemo(Memo));
-            using (var db = _db.GetConnection())
-            {
-                var updated = db.Execute(@"UPDATE Employees
-                                            SET MemoId = @MemoId
-                                            WHERE id = @EmployeeId", new { MemoId = insertedMemo.Id, Memo.EmployeeId });
-                if (updated == 1) insertedMemo.EmployeeId = Memo.EmployeeId;
-                return insertedMemo;
             }
         }
 
@@ -87,12 +72,9 @@ namespace PIOTL.DataAccess
                 
                                  OUTPUT INSERTED.*
                                  VALUES
-                                       (@purchasedAt
-                                       ,@decommissionedAt
-                                       ,@isNew
-                                       ,@isWorking
-                                       ,@make
-                                       ,@model)", Memo);
+                                       (@userId
+                                       ,@message
+                                       ,@DateCreated)", Memo);
 
             }
         }
