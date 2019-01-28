@@ -27,7 +27,7 @@ namespace PIOTL
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            var dbInterface = new DatabaseInterface(Configuration, "Piotl");
+            var dbInterface = new DatabaseInterface(Configuration, "PIOTL");
             services.AddSingleton<DatabaseInterface>(dbInterface);
             services.AddCors();
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
