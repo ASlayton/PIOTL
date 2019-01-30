@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace PIOTL.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/controller")]
     [ApiController]
     public class UserController : ControllerBase
     {
@@ -25,6 +25,7 @@ namespace PIOTL.Controllers
         [HttpGet]
         public IActionResult GetAll()
         {
+            
             var allUsers = _User.GetUser();
             return Ok(allUsers);
         }
