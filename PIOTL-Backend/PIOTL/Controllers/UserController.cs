@@ -25,7 +25,6 @@ namespace PIOTL.Controllers
         [HttpGet]
         public IActionResult GetAll()
         {
-            
             var allUsers = _User.GetUser();
             return Ok(allUsers);
         }
