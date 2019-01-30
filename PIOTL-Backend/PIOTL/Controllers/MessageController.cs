@@ -14,12 +14,12 @@ namespace PIOTL.Controllers
     public class MessageController : ControllerBase
     {
         DatabaseInterface _db;
-        MessageStorage _Message;
+        MessageAccess _Message;
 
         public MessageController(DatabaseInterface db)
         {
             _db = db;
-            _Message = new MessageStorage(db);
+            _Message = new MessageAccess(db);
         }
 
         [HttpGet]
@@ -63,11 +63,9 @@ namespace PIOTL.Controllers
         }
 
         [HttpPost("Message")]
-        public async Task<ActionResult<Message>> PostMessage(MessageWithEmployeeId Message)
+        public async Task<ActionResult<Message>> PostMessage(Message Message)
         {
-            return Message.EmployeeId is null
-                ? Ok(await _Message.PostMessage(Message))
-                : Ok(await _Message.PostMessageAndAssignToEmployee(Message));
+            return Ok(await _Message.PostMessage(Message));
         }
     }
 }

@@ -2,19 +2,34 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Dapper;
 using Microsoft.AspNetCore.Mvc;
+using PIOTL;
 
-namespace PIOTL.Controllers
+namespace BangazonInc.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
     public class ValuesController : ControllerBase
     {
+        DatabaseInterface _db;
+        //
+
+        public ValuesController(DatabaseInterface db)
+        {
+            _db = db;
+            // Instantiate new storage class here
+            // _values = new ValuesStorage(db);
+        }
+
         // GET api/values
         [HttpGet]
         public ActionResult<IEnumerable<string>> Get()
         {
-            return new string[] { "value1", "value2" };
+            using (var connection = _db.GetConnection())
+            {
+                return Ok();
+            }
         }
 
         // GET api/values/5

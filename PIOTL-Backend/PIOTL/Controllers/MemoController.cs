@@ -14,18 +14,18 @@ namespace PIOTL.Controllers
     public class MemoController : ControllerBase
     {
         DatabaseInterface _db;
-        MemoStorage _Memo;
+        MemoAccess _Memo;
 
         public MemoController(DatabaseInterface db)
         {
             _db = db;
-            _Memo = new MemoStorage(db);
+            _Memo = new MemoAccess(db);
         }
 
         [HttpGet]
-        public IActionResult GetAll()
+        public IActionResult GetAllMemos()
         {
-            var allMemos = _Memo.GetMemo();
+            var allMemos = _Memo.GetAllMemos();
             return Ok(allMemos);
         }
 
@@ -63,11 +63,9 @@ namespace PIOTL.Controllers
         }
 
         [HttpPost("Memo")]
-        public async Task<ActionResult<Memo>> PostMemo(MemoWithEmployeeId Memo)
+        public async Task<ActionResult<Memo>> PostMemo(Memo Memo)
         {
-            return Memo.EmployeeId is null
-                ? Ok(await _Memo.PostMemo(Memo))
-                : Ok(await _Memo.PostMemoAndAssignToEmployee(Memo));
+            return Ok(await _Memo.PostMemo(Memo));
         }
     }
 }

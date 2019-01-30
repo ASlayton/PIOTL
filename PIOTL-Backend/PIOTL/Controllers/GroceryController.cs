@@ -14,18 +14,18 @@ namespace PIOTL.Controllers
     public class GroceryController : ControllerBase
     {
         DatabaseInterface _db;
-        GroceryStorage _Grocery;
+        GroceryAccess _Grocery;
 
         public GroceryController(DatabaseInterface db)
         {
             _db = db;
-            _Grocery = new GroceryStorage(db);
+            _Grocery = new GroceryAccess(db);
         }
 
         [HttpGet]
         public IActionResult GetAll()
         {
-            var allGrocerys = _Grocery.GetGrocery();
+            var allGrocerys = _Grocery.GetAllGrocery();
             return Ok(allGrocerys);
         }
 
@@ -63,11 +63,9 @@ namespace PIOTL.Controllers
         }
 
         [HttpPost("Grocery")]
-        public async Task<ActionResult<Grocery>> PostGrocery(GroceryWithEmployeeId Grocery)
+        public async Task<ActionResult<Grocery>> PostGrocery(Grocery Grocery)
         {
-            return Grocery.EmployeeId is null
-                ? Ok(await _Grocery.PostGrocery(Grocery))
-                : Ok(await _Grocery.PostGroceryAndAssignToEmployee(Grocery));
+            return Ok(await _Grocery.PostGrocery(Grocery));
         }
     }
 }

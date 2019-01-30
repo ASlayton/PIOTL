@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 using PIOTL.Models;
+using Dapper;
 
 
 namespace PIOTL.DataAccess
@@ -17,7 +18,7 @@ namespace PIOTL.DataAccess
 
         //Get all Chores
 
-        public List<Chore> GetChore()
+        public List<Chore> GetAllChores()
         {
             using (var db = _db.GetConnection())
             {
@@ -53,27 +54,11 @@ namespace PIOTL.DataAccess
             using (var db = _db.GetConnection())
             {
                 var sql = db.Execute(@"UPDATE [dbo].[Chores]
-                                       SET [purchasedAt] = @purchasedAt
-                                          ,[decommissionedAt] = @decommissionedAt
-                                          ,[isNew] = @isNew
-                                          ,[isWorking] = @isWorking
-                                          ,[Make] = @make
-                                          ,[Model] = @model
-                                            Where Id = @id", Chore);
+                                       SET [name] = @name
+                                          ,[room] = @room
+                                          ,[Interval] = @interval
+                                          ,[worthAmt] = @worthAmt", Chore);
                 return sql == 1;
-            }
-        }
-
-        public async Task<ChoreWithEmployeeId> PostChoreAndAssignToEmployee(ChoreWithEmployeeId Chore)
-        {
-            var insertedChore = new ChoreWithEmployeeId(await PostChore(Chore));
-            using (var db = _db.GetConnection())
-            {
-                var updated = db.Execute(@"UPDATE Employees
-                                            SET ChoreId = @ChoreId
-                                            WHERE id = @EmployeeId", new { ChoreId = insertedChore.Id, Chore.EmployeeId });
-                if (updated == 1) insertedChore.EmployeeId = Chore.EmployeeId;
-                return insertedChore;
             }
         }
 
@@ -87,12 +72,10 @@ namespace PIOTL.DataAccess
                 
                                  OUTPUT INSERTED.*
                                  VALUES
-                                       (@purchasedAt
-                                       ,@decommissionedAt
-                                       ,@isNew
-                                       ,@isWorking
-                                       ,@make
-                                       ,@model)", Chore);
+                                       (@name
+                                       ,@room
+                                       ,@interval
+                                       ,@worthAmt)", Chore);
 
             }
         }
