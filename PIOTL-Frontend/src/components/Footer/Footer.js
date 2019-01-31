@@ -1,7 +1,7 @@
 import React from 'react';
-import './Death.css';
+import './Footer.css';
 
-class Death extends React.Component {
+class Footer extends React.Component {
   render () {
     return (
       <div>
@@ -11,4 +11,4 @@ class Death extends React.Component {
   }
 };
 
-export default Death;
+export default Footer;
