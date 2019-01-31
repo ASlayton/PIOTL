@@ -37,7 +37,7 @@ class Navbar extends React.Component {
               ) : (
                 <ul className="nav navbar-nav navbar-right">
                   <button className="btn btn-warning">
-                    <Link to="/login" className="login-btn">Login!</Link>
+                    <Link to="/Login" className="login-btn">Login!</Link>
                   </button>
                 </ul>
               )
