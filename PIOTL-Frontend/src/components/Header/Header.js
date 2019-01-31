@@ -15,9 +15,6 @@ class Navbar extends React.Component {
       <nav className="navbar">
         <div className="container-fluid">
           <div className="navbar-header">
-            <button type="button" className="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-              <span className="test-icon"></span>
-            </button>
             <h1 className="app-name">Put It On The List</h1>
           </div>
           <div>
