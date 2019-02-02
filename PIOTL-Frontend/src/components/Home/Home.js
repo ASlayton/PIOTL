@@ -4,6 +4,10 @@ import Memo from '../Memo/Memo';
 
 // IF NOT SIGNED IN, USER IS DIRECTED HERE
 class Home extends React.Component {
+  state = {
+    user: {},
+  };
+
   render () {
     return (
       <div>

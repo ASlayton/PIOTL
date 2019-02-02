@@ -1,6 +1,6 @@
 {
   "piotlConfig": {
-    "apibaseUrl": "https://localhost:44311/api/"
+    "apibaseUrl": "https://localhost:44330/api/"
   },
   "firebaseConfig": {
     "apiKey": "AIzaSyAGWa0Qu4Bc24PpsbkU2NMEpJLTe8QLBmE",
