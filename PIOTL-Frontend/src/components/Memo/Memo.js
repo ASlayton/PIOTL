@@ -10,9 +10,8 @@ class Home extends React.Component {
       id: 0,
       userId: '',
       message: '',
-      dateCreated: date,
-
-    }
+      dateCreated: '',
+    },
   }
   getcustomers = () => {
     apiAccess.apiGet('memos')
