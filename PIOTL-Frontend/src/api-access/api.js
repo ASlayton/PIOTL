@@ -2,7 +2,6 @@ import constants from '../constants.json';
 import axios from 'axios';
 
 const apibaseUrl = constants.piotlConfig.apibaseUrl;
-console.error('My api base url', apibaseUrl);
 // endpoint: string
 // example call: apiGet('customers')
 const apiGet = (endpoint) => {

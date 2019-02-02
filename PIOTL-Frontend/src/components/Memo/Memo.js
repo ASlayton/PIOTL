@@ -9,10 +9,10 @@ class Home extends React.Component {
   }
 
   componentDidMount () {
-    apiAccess.apiGet('Memo')
+    console.error('User:', this.props);
+    apiAccess.apiGet('Memo/' + 1)
       .then(res => {
-        const data = res.data;
-        console.error('My memos:', data);
+        const data = this.state.memos.concat(res.data);
         this.setState({memos: data});
       })
       .catch((err) => {
@@ -23,14 +23,14 @@ class Home extends React.Component {
   render () {
     const memoList = this.state.memos.map((memo) => {
       return (
-        <div className="memo-container">
+        <li className="memo-container">
           <div>
             <p>{memo.dateCreated}</p>
           </div>
           <div>
             <p>{memo.message}</p>
           </div>
-        </div>
+        </li>
       );
     });
     return (

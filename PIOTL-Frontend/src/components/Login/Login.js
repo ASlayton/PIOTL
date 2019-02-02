@@ -34,18 +34,6 @@ class Login extends React.Component {
       .catch(err => {
         this.setState({isError: true, error: err.message});
       });
-  }
-
-  getUserData  = () => {
-    api.apiGet('Memo')
-      .then(res => {
-        const data = res.data;
-        console.error('My memos:', data);
-        this.setState({memos: data});
-      })
-      .catch((err) => {
-        console.error('Error with memo get request', err);
-      });
   };
 
   render () {
