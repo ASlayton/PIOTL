@@ -36,6 +36,18 @@ class Login extends React.Component {
       });
   }
 
+  getUserData  = () => {
+    api.apiGet('Memo')
+      .then(res => {
+        const data = res.data;
+        console.error('My memos:', data);
+        this.setState({memos: data});
+      })
+      .catch((err) => {
+        console.error('Error with memo get request', err);
+      });
+  };
+
   render () {
     return (
       <div className='LoginForm'>
