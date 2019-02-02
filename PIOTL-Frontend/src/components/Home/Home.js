@@ -6,9 +6,13 @@ import auth from '../../firebaseRequests/auth';
 
 // IF SIGNED IN, USER IS DIRECTED HERE
 class Home extends React.Component {
+
   state = {
     user: {},
   };
+  userHandler = (user) => {
+    this.setState({user});
+  }
   componentDidMount () {
     const id = auth.getUid();
     api.apiGet('User/' + id)
@@ -25,7 +29,7 @@ class Home extends React.Component {
     return (
       <div>
         <div>
-          <Memo user={this.state.user}/>
+          <Memo user={this.state.user} userHandler={this.userHandler}/>
         </div>
       </div>
     );

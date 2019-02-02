@@ -3,27 +3,30 @@ import React from 'react';
 import apiAccess from '../../api-access/api';
 
 // IF NOT SIGNED IN, USER IS DIRECTED HERE
-class Home extends React.Component {
+class Memo extends React.Component {
   state = {
     memos: [],
-  }
+  };
 
-  componentDidMount () {
-    console.error('User:', this.props);
-    apiAccess.apiGet('Memo/' + 1)
+  componentDidUpdate = () => {
+    if (!this.props.user || this.state.memos.length) return;
+
+    apiAccess.apiGet('Memo/getbyuser/' + this.props.user.id)
       .then(res => {
-        const data = this.state.memos.concat(res.data);
-        this.setState({memos: data});
+        this.setState({memos: res.data});
       })
       .catch((err) => {
         console.error('Error with memo get request', err);
       });
-  };
+  }
 
   render () {
+    // this.getMemos();
+    let count = 1;
     const memoList = this.state.memos.map((memo) => {
+      count++;
       return (
-        <li className="memo-container">
+        <li className="memo-container" key={'memo' + count}>
           <div>
             <p>{memo.dateCreated}</p>
           </div>
@@ -46,4 +49,4 @@ class Home extends React.Component {
   }
 };
 
-export default Home;
+export default Memo;
