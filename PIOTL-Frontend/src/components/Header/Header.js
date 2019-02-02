@@ -30,7 +30,7 @@ class Navbar extends React.Component {
                       onClick={logoutClickEvent}
                       className="btn btn-warning"
                     >
-                      Logout
+                      <Link to="/LandingPage">Logout</Link>
                     </button>
                   </li>
                 </ul>

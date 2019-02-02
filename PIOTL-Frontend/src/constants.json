@@ -1,0 +1,13 @@
+{
+  "piotlConfig": {
+    "apibaseUrl": "https://localhost:44311/api/"
+  },
+  "firebaseConfig": {
+    "apiKey": "AIzaSyAGWa0Qu4Bc24PpsbkU2NMEpJLTe8QLBmE",
+    "authDomain": "piotlv1.firebaseapp.com",
+    "databaseURL": "https://piotlv1.firebaseio.com",
+    "projectId": "piotlv1",
+    "storageBucket": "piotlv1.appspot.com",
+    "messagingSenderId": "1012219458497"
+  }
+}
