@@ -4,10 +4,8 @@ import firebase from 'firebase';
 import {BrowserRouter, Route, Switch, Redirect}  from 'react-router-dom';
 import Header from '../components/Header/Header';
 import Footer from '../components/Footer/Footer';
-// import Navbar from '../components/Navbar/Navbar';
 import Login from '../components/Login/Login';
 import Register from '../components/Register/Register';
-// import Home from '../components/Home/Home';
 import fbConnection from '../firebaseRequests/connection';
 import './App.css';
 import LandingPage from '../components/LandingPage/LandingPage';
@@ -82,7 +80,8 @@ class App extends React.Component {
         <BrowserRouter>
           <div>
             <header>
-              <Header />
+              <Header authed={this.state.authed} wentAway={this.wentAway} />
+
             </header>
             <div className="row">
               <Switch>

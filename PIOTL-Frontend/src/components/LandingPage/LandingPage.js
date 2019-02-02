@@ -12,8 +12,8 @@ class LandingPage extends React.Component {
           <p>Put it on the list is an app for the entire family to keep up to date with chores, allowances, and offers a calendar for the entire family.</p>
         </div>
         <div>
-          <Link to="/Login" className="btn">Login</Link>
-          <Link to="/register" className="btn">Register</Link>
+          <button><Link to="/Login" className="btn">Login</Link></button>
+          <button><Link to="/register" className="btn">Register</Link></button>
         </div>
       </div>
     );
