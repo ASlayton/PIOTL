@@ -1,5 +1,6 @@
 import './LandingPage.css';
 import React from 'react';
+import {Link}  from 'react-router-dom';
 
 // IF NOT SIGNED IN, USER IS DIRECTED HERE
 class LandingPage extends React.Component {
@@ -11,8 +12,8 @@ class LandingPage extends React.Component {
           <p>Put it on the list is an app for the entire family to keep up to date with chores, allowances, and offers a calendar for the entire family.</p>
         </div>
         <div>
-          <button>Login</button>
-          <button>Register</button>
+          <button><Link to="/Login" className="btn">Login</Link></button>
+          <button><Link to="/register" className="btn">Register</Link></button>
         </div>
       </div>
     );
