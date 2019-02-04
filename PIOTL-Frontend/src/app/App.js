@@ -80,7 +80,7 @@ class App extends React.Component {
         <BrowserRouter>
           <div>
             <header>
-              <Header authed={this.state.authed} wentAway={this.wentAway} />
+              <Header authed={this.state.authed} wentAway={this.wentAway} user={this.state.user} />
 
             </header>
             <div className="row">

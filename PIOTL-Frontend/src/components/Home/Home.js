@@ -1,6 +1,7 @@
 import './Home.css';
 import React from 'react';
 import Memo from '../Memo/Memo';
+import ToDo from '../ToDo/ToDo';
 import api from '../../api-access/api';
 import auth from '../../firebaseRequests/auth';
 
@@ -30,6 +31,7 @@ class Home extends React.Component {
       <div>
         <div>
           <Memo user={this.state.user} userHandler={this.userHandler}/>
+          <ToDo />
         </div>
       </div>
     );

@@ -22,8 +22,22 @@ namespace PIOTL.DataAccess
         {
             using (var db = _db.GetConnection())
             {
-                string sql = "Select * From Chores";
+                string sql = "Select * From Choreslist";
                 return db.Query<Chore>(sql).ToList();
+            }
+        }
+
+        //Get all Chores for certain user
+
+        public List<Chore> GetAllChoresbyUser(int userId)
+        {
+            using (var db = _db.GetConnection())
+            {
+                var sql = db.Query<Chore>(@"select * from Chores ch
+                               join ChoresList cl
+                               on cl.type = ch.id
+                               where cl.assignedTo = @id; ", new { id = userId}).ToList();
+                return sql;
             }
         }
 

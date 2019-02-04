@@ -18,7 +18,7 @@ namespace PIOTL.DataAccess
 
         //Get all Users
 
-        public List<User> GetUser()
+        public List<User> GetAllUsers()
         {
             using (var db = _db.GetConnection())
             {
@@ -28,22 +28,22 @@ namespace PIOTL.DataAccess
         }
 
         // Get Single User 
-        public User GetUserById(int UserId)
+        public User GetUserById(string firebaseId)
         {
             using (var db = _db.GetConnection())
             {
-                var sql = db.QueryFirstOrDefault<User>(@"SELECT * From Users Where Id = @id", new { id = UserId });
+                var sql = db.QueryFirstOrDefault<User>(@"SELECT * From Users Where firebaseID = @id", new { Id = firebaseId });
                 return sql;
             }
         }
 
         // Delete Single User
 
-        public bool DeleteById(int UserId)
+        public bool DeleteById(string firebaseId)
         {
             using (var db = _db.GetConnection())
             {
-                var sql = db.Execute("Delete from Users Where Id = @id", new { id = UserId });
+                var sql = db.Execute("Delete from Users Where Id = @id", new { id = firebaseId });
                 return sql == 1;
             }
         }
@@ -54,12 +54,12 @@ namespace PIOTL.DataAccess
             using (var db = _db.GetConnection())
             {
                 var sql = db.Execute(@"UPDATE [dbo].[Users]
-                                       SET [firstName] = @firstName
-                                          ,[lastName] = @lastName
+                                       SET [firstName] = @firstname
+                                          ,[lastName] = @lastname
+                                          ,[familyId] = @familyId
                                           ,[firebaseId] = @firebaseId
-                                          ,[FamilyId] = @familyId
-                                          ,[Adult] = @adult
-                                          ,[Earned] = @earned
+                                          ,[adult] = @adult
+                                          ,[earned] = @earned
                                             Where Id = @id", User);
                 return sql == 1;
             }
@@ -75,14 +75,16 @@ namespace PIOTL.DataAccess
                 
                                  OUTPUT INSERTED.*
                                  VALUES
-                                       (@firstName
+                                       (@userId
+                                       ,@firstName
                                        ,@lastName
-                                       ,@firebaseId
+                                       ,@firebaseUID
                                        ,@familyId
-                                       ,@Adult
-                                       ,@Earned)", User);
+                                       ,@adult
+                                       ,@earned)", User);
 
             }
         }
     }
 }
+
