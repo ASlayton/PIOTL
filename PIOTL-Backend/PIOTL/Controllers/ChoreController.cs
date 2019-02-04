@@ -39,8 +39,8 @@ namespace PIOTL.Controllers
         [HttpGet("choreByUser/{id}")]
         public IActionResult GetAllChoresByUser(int id)
         {
-            var singleChore = _Chore.GetAllChoresbyUser(id);
-            return Ok(singleChore);
+            var choreByUser = _Chore.GetAllChoresbyUser(id);
+            return Ok(choreByUser);
         }
 
         [HttpDelete("{id}")]

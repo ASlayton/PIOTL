@@ -22,7 +22,7 @@ namespace PIOTL.DataAccess
         {
             using (var db = _db.GetConnection())
             {
-                string sql = "Select * From Choreslist";
+                string sql = "Select * From Chores";
                 return db.Query<Chore>(sql).ToList();
             }
         }

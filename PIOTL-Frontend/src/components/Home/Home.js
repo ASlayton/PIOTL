@@ -31,7 +31,7 @@ class Home extends React.Component {
       <div>
         <div>
           <Memo user={this.state.user} userHandler={this.userHandler}/>
-          <ToDo />
+          <ToDo user={this.state.user}/>
         </div>
       </div>
     );

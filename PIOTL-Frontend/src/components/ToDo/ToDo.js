@@ -11,10 +11,11 @@ class ToDo extends React.Component {
   componentDidUpdate = () => {
     if (!this.props.user || this.state.Chores.length) return;
 
-    apiAccess.apiGet('Chores/chorebyUser/' + this.props.user.id)
+    apiAccess.apiGet('ChoresList/ChoresListByUser/' + this.props.user.id)
       .then(res => {
-        this.setState({Chores: res.data});
         console.error('I am being called.');
+        this.setState({Chores: res.data});
+
       })
       .catch((err) => {
         console.error('Error with ToDo get request', err);
