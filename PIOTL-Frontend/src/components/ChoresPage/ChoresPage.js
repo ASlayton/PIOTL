@@ -1,6 +1,5 @@
-import './Home.css';
+import './ChoresPage.css';
 import React from 'react';
-import Memo from '../Memo/Memo';
 import ToDo from '../ToDo/ToDo';
 import ToDoWeek from '../ToDoWeek/ToDoWeek';
 import api from '../../api-access/api';
@@ -31,9 +30,8 @@ class Home extends React.Component {
     return (
       <div>
         <div>
-          <Memo user={this.state.user} userHandler={this.userHandler}/>
           <ToDo user={this.state.user}/>
-          <ToDoWeek user={this.state.user}/>
+          <ToDoWeek user={this.state.user} />
         </div>
       </div>
     );

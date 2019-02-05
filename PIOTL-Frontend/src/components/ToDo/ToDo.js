@@ -13,9 +13,7 @@ class ToDo extends React.Component {
 
     apiAccess.apiGet('ChoresList/ChoresListByUser/' + this.props.user.id)
       .then(res => {
-        console.error('I am being called.');
         this.setState({Chores: res.data});
-
       })
       .catch((err) => {
         console.error('Error with ToDo get request', err);
@@ -41,7 +39,7 @@ class ToDo extends React.Component {
     return (
       <div>
         <div>
-          <h1>ToDos</h1>
+          <h1>To Do Today</h1>
         </div>
         <ul>
           {ToDoList}
