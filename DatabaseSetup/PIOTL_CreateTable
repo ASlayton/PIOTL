@@ -17,7 +17,7 @@ VALUES ('John', 'Smith', 'j4TP93ysDIN8ibQ7oKEBRoPWlhM2', 1, 1, 0)
 CREATE TABLE Family 
 (
 	id int IDENTITY(1,1) PRIMARY KEY,
-	name varchar(20)
+	name varchar(120)
 );
 
 INSERT INTO Family (name)
@@ -43,11 +43,12 @@ CREATE TABLE ChoresList
 	completed bit,
 	assignedTo int,
 	assignedBy int,
-	type int
+	type int,
+	familyId int
 );
 
-INSERT INTO ChoresList (dateAssigned, dateDue, completed, assignedTo, assignedBy, type)
-VALUES ('2019-01-01 00:00:00', '2019-02-01 00:00:00', 0, 2, 1, 1 )
+INSERT INTO ChoresList (dateAssigned, dateDue, completed, assignedTo, assignedBy, type, familyId)
+VALUES ('2019-01-01 00:00:00', '2019-02-01 00:00:00', 0, 2, 1, 1, 1 )
 
 CREATE TABLE Memos 
 (

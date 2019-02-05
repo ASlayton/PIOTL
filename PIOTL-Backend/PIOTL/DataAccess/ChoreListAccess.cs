@@ -3,7 +3,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using PIOTL.Models;
 using Dapper;
-
+using System;
+using PIOTL.Helpers;
 
 namespace PIOTL.DataAccess
 {
@@ -29,13 +30,53 @@ namespace PIOTL.DataAccess
 
         //Get all ChoresLists for certain user
 
-        public List<ChoresList> GetAllChoresListbyUser(int userId)
+        public List<ChoresListByUser> GetAllChoresListbyUser(int userId)
         {
             using (var db = _db.GetConnection())
             {
-                var sql = db.Query<ChoresList>(@"SELECT *
-                                FROM ChoresList
-                                WHERE ChoresList.assignedTo = @id;", new { id = userId }).ToList();
+                var sql = db.Query<ChoresListByUser>(@"
+                              SELECT 
+                                cl.dateAssigned as DateAssigned,
+                                cl.assignedTo as AssignedTo,
+                                cl.completed as Completed,
+                                rm.name as RoomName,
+                                ch.name as Type,
+                                ch.worthAmt as Worth
+                              FROM ChoresList cl
+                              JOIN Chores ch
+                                ON cl.type = ch.id
+                              JOIN Rooms rm
+                                ON ch.room = rm.id
+                              WHERE cl.assignedTo = 1;", new { id = userId }).ToList();
+                return sql;
+            }
+        }
+
+        //Get all ChoresLists for certain user for the current week
+
+        public List<ChoresListByUser> GetAllChoresListbyUserNarrow(int userId)
+        {
+            using (var db = _db.GetConnection())
+            {
+                var myStart = DateTime.Now.FirstDayOfWeek();
+                var myEnd = DateTime.Now.LastDayOfWeek();
+                var sql = db.Query<ChoresListByUser>(@"
+                              SELECT 
+                                cl.dateAssigned as DateAssigned,
+                                cl.assignedTo as AssignedTo,
+                                cl.completed as Completed,
+                                rm.name as RoomName,
+                                ch.name as Type,
+                                ch.worthAmt as Worth
+                              FROM ChoresList cl
+                              JOIN Chores ch
+                                ON cl.type = ch.id
+                              JOIN Rooms rm
+                                ON ch.room = rm.id
+                              WHERE cl.assignedTo = 1
+                              AND cl.dateAssigned between @myStart and @myEnd
+                              AND cl.completed = 0
+                              ;", new { id = userId, myStart = myStart, myEnd = myEnd }).ToList();
                 return sql;
             }
         }

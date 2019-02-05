@@ -43,6 +43,13 @@ namespace PIOTL.Controllers
             return Ok(choresListByUser);
         }
 
+        [HttpGet("ChoresListByUserNarrow/{id}")]
+        public IActionResult GetAllChoresListsByUserNarrow(int id)
+        {
+            var choresListByUser = _ChoresList.GetAllChoresListbyUserNarrow(id);
+            return Ok(choresListByUser);
+        }
+
         [HttpDelete("{id}")]
         public IActionResult DeleteById(int id)
         {
