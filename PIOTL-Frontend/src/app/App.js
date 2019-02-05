@@ -10,6 +10,7 @@ import fbConnection from '../firebaseRequests/connection';
 import './App.css';
 import LandingPage from '../components/LandingPage/LandingPage';
 import Home from '../components/Home/Home';
+import ChoresPage from '../components/ChoresPage/ChoresPage';
 
 // START FIREBASE CONNECTION
 fbConnection();
@@ -80,7 +81,7 @@ class App extends React.Component {
         <BrowserRouter>
           <div>
             <header>
-              <Header authed={this.state.authed} wentAway={this.wentAway} />
+              <Header authed={this.state.authed} wentAway={this.wentAway} user={this.state.user} />
 
             </header>
             <div className="row">
@@ -105,6 +106,11 @@ class App extends React.Component {
                   path="/login"
                   authed={this.state.authed}
                   component={Login}
+                />
+                <PrivateRoute
+                  path="/ChoresPage"
+                  authed={this.state.authed}
+                  component={ChoresPage}
                 />
               </Switch>
             </div>

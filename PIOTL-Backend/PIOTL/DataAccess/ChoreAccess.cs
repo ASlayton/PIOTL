@@ -27,6 +27,20 @@ namespace PIOTL.DataAccess
             }
         }
 
+        //Get all Chores for certain user
+
+        public List<Chore> GetAllChoresbyUser(int userId)
+        {
+            using (var db = _db.GetConnection())
+            {
+                var sql = db.Query<Chore>(@"select * from Chores ch
+                               join ChoresList cl
+                               on cl.type = ch.id
+                               where cl.assignedTo = @id; ", new { id = userId}).ToList();
+                return sql;
+            }
+        }
+
         // Get Single Chore 
         public Chore GetChoreById(int ChoreId)
         {

@@ -18,21 +18,21 @@ namespace PIOTL.DataAccess
 
         //Get all Memos
 
-        public List<Memo> GetAllMemos()
+        public List<Memo> GetAllMemosFromUser(int Id)
         {
             using (var db = _db.GetConnection())
             {
-                string sql = "Select * From Memos";
-                return db.Query<Memo>(sql).ToList();
+                var sql = db.Query<Memo>(@"Select * From Memos where userId = @Id", new { id = Id }).ToList();
+                return sql;
             }
         }
 
         // Get Single Memo 
-        public Memo GetMemoById(int MemoId)
+        public Memo GetMemoById(int Id)
         {
             using (var db = _db.GetConnection())
             {
-                var sql = db.QueryFirstOrDefault<Memo>(@"SELECT * From Memos Where Id = @id", new { id = MemoId });
+                var sql = db.QueryFirstOrDefault<Memo>(@"SELECT * From Memos Where Id = @id", new { id = Id });
                 return sql;
             }
         }

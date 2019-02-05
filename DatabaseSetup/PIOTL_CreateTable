@@ -11,15 +11,13 @@ CREATE TABLE Users
 	earned decimal(6,2)
 );
 
-INSERT INTO Users (firstName, lastName, familyId, adult, earned)
-VALUES ('John', 'Smith', 1, 1, 0)
-INSERT INTO Users (firstName, lastName, familyId, adult, earned)
-VALUES ('Sarah', 'Smith', 1, 0, 0)
+INSERT INTO Users (firstName, lastName, firebaseID, familyId, adult, earned)
+VALUES ('John', 'Smith', 'j4TP93ysDIN8ibQ7oKEBRoPWlhM2', 1, 1, 0)
 
 CREATE TABLE Family 
 (
 	id int IDENTITY(1,1) PRIMARY KEY,
-	name varchar(20)
+	name varchar(120)
 );
 
 INSERT INTO Family (name)
@@ -44,11 +42,13 @@ CREATE TABLE ChoresList
 	dateDue datetime,
 	completed bit,
 	assignedTo int,
-	assignedBy int
+	assignedBy int,
+	type int,
+	familyId int
 );
 
-INSERT INTO ChoresList (dateAssigned, dateDue, completed, assignedTo, assignedBy)
-VALUES ('2019-01-01 00:00:00', '2019-02-01 00:00:00', 0, 2, 1 )
+INSERT INTO ChoresList (dateAssigned, dateDue, completed, assignedTo, assignedBy, type, familyId)
+VALUES ('2019-01-01 00:00:00', '2019-02-01 00:00:00', 0, 2, 1, 1, 1 )
 
 CREATE TABLE Memos 
 (

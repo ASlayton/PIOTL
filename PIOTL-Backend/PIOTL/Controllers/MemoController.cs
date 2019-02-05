@@ -6,6 +6,7 @@ using PIOTL.DataAccess;
 using PIOTL.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 
 namespace PIOTL.Controllers
 {
@@ -22,10 +23,10 @@ namespace PIOTL.Controllers
             _Memo = new MemoAccess(db);
         }
 
-        [HttpGet]
-        public IActionResult GetAllMemos()
+        [HttpGet("getbyuser/{id}")]
+        public IActionResult GetAllMemos(int id)
         {
-            var allMemos = _Memo.GetAllMemos();
+            var allMemos = _Memo.GetAllMemosFromUser(id);
             return Ok(allMemos);
         }
 

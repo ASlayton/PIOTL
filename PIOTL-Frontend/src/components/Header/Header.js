@@ -10,16 +10,11 @@ class Navbar extends React.Component {
       authRequests.logoutUser();
       wentAway();
     };
-
     return (
       <nav className="navbar">
         <div className="container-fluid">
           <div className="navbar-header">
             <h1 className="app-name">Put It On The List</h1>
-          </div>
-          <div>
-            <p>Username</p>
-            <p>Account Type</p>
           </div>
           <div className="collapse navbar-collapse" id="myNavbar">
             {

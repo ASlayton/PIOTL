@@ -1,34 +1,37 @@
-import './Memo.css';
+import './ToDo.css';
 import React from 'react';
 import apiAccess from '../../api-access/api';
 
 // IF NOT SIGNED IN, USER IS DIRECTED HERE
-class Home extends React.Component {
+class ToDo extends React.Component {
   state = {
-    memos: [],
-  }
-
-  componentDidMount () {
-    console.error('User:', this.props);
-    apiAccess.apiGet('Memo/' + 1)
-      .then(res => {
-        const data = this.state.memos.concat(res.data);
-        this.setState({memos: data});
-      })
-      .catch((err) => {
-        console.error('Error with memo get request', err);
-      });
+    Chores: [],
   };
 
+  componentDidUpdate = () => {
+    if (!this.props.user || this.state.Chores.length) return;
+
+    apiAccess.apiGet('ChoresList/ChoresListByUser/' + this.props.user.id)
+      .then(res => {
+        this.setState({Chores: res.data});
+      })
+      .catch((err) => {
+        console.error('Error with ToDo get request', err);
+      });
+  }
+
   render () {
-    const memoList = this.state.memos.map((memo) => {
+    // this.getToDos();
+    let count = 1;
+    const ToDoList = this.state.Chores.map((ToDo) => {
+      count++;
       return (
-        <li className="memo-container">
+        <li className="ToDoToday-container" key={'ToDoToday' + count}>
           <div>
-            <p>{memo.dateCreated}</p>
+            <p>{ToDo.assignedTo}</p>
           </div>
           <div>
-            <p>{memo.message}</p>
+            <p>{ToDo.type}</p>
           </div>
         </li>
       );
@@ -36,14 +39,14 @@ class Home extends React.Component {
     return (
       <div>
         <div>
-          <h1>Memos</h1>
+          <h1>To Do Today</h1>
         </div>
         <ul>
-          {memoList}
+          {ToDoList}
         </ul>
       </div>
     );
   }
 };
 
-export default Home;
+export default ToDo;
