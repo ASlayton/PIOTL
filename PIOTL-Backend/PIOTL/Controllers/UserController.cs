@@ -36,6 +36,13 @@ namespace PIOTL.Controllers
             return Ok(singleUser);
         }
 
+        [HttpGet("familyMembers/{id}")]
+        public IActionResult GetMembersOfFamily(int id)
+        {
+            var family = _User.GetMembersOfFamily(id);
+            return Ok(family);
+        }
+
         [HttpDelete("{id}")]
         public IActionResult DeleteById(string id)
         {

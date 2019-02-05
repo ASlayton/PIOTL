@@ -27,6 +27,16 @@ namespace PIOTL.DataAccess
             }
         }
 
+        //Get all members of family
+        public List<User> GetMembersOfFamily(int famid)
+        {
+            using (var db = _db.GetConnection())
+            {
+                var sql = db.Query<User>(@"select * from Users where Users.familyId = @id", new {id = famid}).ToList();
+                return sql;
+            }
+        }
+
         // Get Single User 
         public User GetUserById(string firebaseId)
         {
