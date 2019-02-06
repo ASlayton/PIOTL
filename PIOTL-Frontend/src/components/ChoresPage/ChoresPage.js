@@ -35,28 +35,41 @@ class ChoresPage extends React.Component {
       .then(res => {
         const data = res.data;
         this.setState({family: data});
+        this.state.family.forEach((member) => {
+          api.apiGet('ChoresListByUser/' + member.id)
+            .then(eachRes => {
+              const singleData = eachRes.data;
+              this.setState({member.chores: singleData});
+            })
+        });
       });
+
   }
   render () {
+    const tasks = {};
     const familyContainer = this.state.family.map((member) => {
+      tasks[member.firstName] = [];
       return (
         <div className={member.firstName}>
           <span className="name-header">{member.firstName}</span>
         </div>
       );
     });
+
     const myChores = this.state.chores.map((chore) => {
+      chore['assignedTo'] = 'Undone';
       return (
-        <div>{chore.name}</div>
+        <div className="draggable" draggable>{chore.name}</div>
       );
     });
+
     return (
       <div className="container-drag">
-        <h2>Drag and Drop ChoresList</h2>
+        <h2>Drag and Drop Chores</h2>
 
         <div>{familyContainer}</div>
-        <div className="droppable" onDragOver={(e) => this.onDragOVer(e)}>
-          <span>Chores List</span>
+        <div className="droppable" onDragOver={(e) => this.onDragOver(e)}>
+          <h3>Chores List</h3>
           {myChores}
         </div>
 
