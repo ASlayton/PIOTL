@@ -11,6 +11,7 @@ import './App.css';
 import LandingPage from '../components/LandingPage/LandingPage';
 import Home from '../components/Home/Home';
 import ChoresPage from '../components/ChoresPage/ChoresPage';
+import Navbar from '../components/Navbar/Navbar';
 
 // START FIREBASE CONNECTION
 fbConnection();
@@ -84,6 +85,7 @@ class App extends React.Component {
               <Header authed={this.state.authed} wentAway={this.wentAway} user={this.state.user} />
 
             </header>
+            <Navbar />
             <div className="row">
               <Switch>
                 <Route path="/" exact />
@@ -107,10 +109,11 @@ class App extends React.Component {
                   authed={this.state.authed}
                   component={Login}
                 />
-                <PrivateRoute
+                <Route
                   path="/ChoresPage"
                   authed={this.state.authed}
                   component={ChoresPage}
+
                 />
               </Switch>
             </div>
