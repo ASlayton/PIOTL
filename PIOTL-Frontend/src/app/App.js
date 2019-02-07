@@ -88,7 +88,6 @@ class App extends React.Component {
             <Navbar />
             <div className="row">
               <Switch>
-                <Route path="/" exact />
                 <PrivateRoute
                   path="/Home"
                   authed={this.state.authed}
@@ -113,8 +112,8 @@ class App extends React.Component {
                   path="/ChoresPage"
                   authed={this.state.authed}
                   component={ChoresPage}
-
                 />
+                <Route path='*' component={LandingPage} />
               </Switch>
             </div>
             <footer>

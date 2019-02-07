@@ -35,13 +35,6 @@ class ChoresPage extends React.Component {
       .then(res => {
         const data = res.data;
         this.setState({family: data});
-        this.state.family.forEach((member) => {
-          api.apiGet('ChoresListByUser/' + member.id)
-            .then(eachRes => {
-              const singleData = eachRes.data;
-              this.setState({member.chores: singleData});
-            })
-        });
       });
 
   }

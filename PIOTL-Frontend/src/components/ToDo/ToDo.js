@@ -10,7 +10,6 @@ class ToDo extends React.Component {
 
   componentDidUpdate = () => {
     if (!this.props.user || this.state.Chores.length) return;
-
     apiAccess.apiGet('ChoresList/ChoresListByUser/' + this.props.user.id)
       .then(res => {
         this.setState({Chores: res.data});
