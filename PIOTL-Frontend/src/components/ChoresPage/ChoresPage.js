@@ -11,6 +11,7 @@ class ChoresPage extends React.Component {
     user: {},
     family: [],
     chores: [],
+    choresList: []
   };
 
   componentDidMount () {
@@ -29,6 +30,12 @@ class ChoresPage extends React.Component {
         const data = res.data;
         this.setState({chores: data});
       });
+
+    api.apiGet('ChoresList/')
+      .then(res => {
+        const data = res.data;
+        this.setState({choresList: data});
+      });
   };
 
   componentDidUpdate () {
@@ -44,11 +51,22 @@ class ChoresPage extends React.Component {
     const tasks = {};
     const familyContainer = this.state.family.map((member) => {
       tasks[member.firstName] = [];
+      this.state.choresList.forEach((item) => {
+        if (item.assignedTo === member.id) {
+          tasks[member.firstName].push(item);
+        }
+      });
       return (
         <div className={member.firstName}>
           <span className="name-header">{member.firstName}</span>
           <ChoresCard tasks={member.tasks} />
         </div>
+      );
+    });
+
+    const choresList = this.state.chores.map((chore) => {
+      return (
+        <li>{chore.name}</li>
       );
     });
 
@@ -59,8 +77,11 @@ class ChoresPage extends React.Component {
         <div>{familyContainer}</div>
         <div className="droppable" onDragOver={(e) => this.onDragOver(e)}>
           <h3>Chores List</h3>
+          <ul>
+            {choresList}
+          </ul>
         </div>
-        <ChoresForm chores={this.state.chores} />
+        <ChoresForm chores={this.state.chores} family={this.state.family}/>
 
       </div>
     );

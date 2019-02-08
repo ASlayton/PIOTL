@@ -12,6 +12,12 @@ class ChoresForm extends React.Component {
         <option value={item.name}>{item.name}</option>
       );
     });
+
+    const members = this.props.family.map((member) => {
+      return (
+        <option value={member.firstName}>{member.firstName}</option>
+      );
+    });
     return (
       <div>
         <h1>Add a chore</h1>
@@ -19,6 +25,10 @@ class ChoresForm extends React.Component {
           <label htmlFor="choreDropdown">Name</label>
           <select name="choreDropdown">
             {options}
+          </select>
+          <label htmlFor="familyMember"></label>
+          <select name="" id="">
+            {members}
           </select>
         </form>
       </div>
