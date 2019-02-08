@@ -54,7 +54,7 @@ namespace PIOTL.DataAccess
 
         //Get all ChoresLists for certain user for the current week
 
-        public List<ChoresListByUser> GetAllChoresListbyUserNarrow(int userId)
+        public List<ChoresListByUser> GetAllChoresListbyUserWeek(int userId)
         {
             using (var db = _db.GetConnection())
             {

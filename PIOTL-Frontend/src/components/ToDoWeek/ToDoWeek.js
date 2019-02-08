@@ -10,7 +10,7 @@ class ToDoWeek extends React.Component {
 
   componentDidUpdate = () => {
     if (!this.props.user || this.state.Chores.length) return;
-    apiAccess.apiGet('ChoresList/ChoresListByUserNarrow/' + this.props.user.id)
+    apiAccess.apiGet('ChoresList/ChoresListByUserWeek/' + this.props.user.id)
       .then(res => {
         this.setState({Chores: res.data});
 
@@ -21,7 +21,6 @@ class ToDoWeek extends React.Component {
   }
 
   render () {
-    // this.getToDos();
     let count = 1;
     const ToDoList = this.state.Chores.map((ToDo) => {
       count++;
