@@ -1,7 +1,7 @@
 import './ToDo.css';
 import React from 'react';
 import apiAccess from '../../api-access/api';
-
+const moment = require('moment');
 // IF NOT SIGNED IN, USER IS DIRECTED HERE
 class ToDo extends React.Component {
   state = {
@@ -10,9 +10,15 @@ class ToDo extends React.Component {
 
   componentDidUpdate = () => {
     if (!this.props.user || this.state.Chores.length) return;
-    apiAccess.apiGet('ChoresList/ChoresListByUserToday/' + this.props.user.id)
+    apiAccess.apiGet('ChoresList/ChoresListByUser/' + this.props.user.id)
       .then(res => {
-        this.setState({Chores: res.data});
+        const currentChores = [];
+        res.data.forEach((chore) => {
+          if (moment().isSame(moment(chore.dateDue), 'day')) {
+            currentChores.push(chore);
+          };
+        });
+        this.setState({Chores: currentChores});
       })
       .catch((err) => {
         console.error('Error with ToDo get request', err);

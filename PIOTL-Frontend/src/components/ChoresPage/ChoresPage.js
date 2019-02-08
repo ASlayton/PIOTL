@@ -2,6 +2,8 @@ import './ChoresPage.css';
 import React from 'react';
 import api from '../../api-access/api';
 import auth from '../../firebaseRequests/auth';
+import ChoresCard from '../ChoresCard/ChoresCard';
+import ChoresForm from '../ChoresForm/ChoresForm';
 
 class ChoresPage extends React.Component {
 
@@ -45,14 +47,8 @@ class ChoresPage extends React.Component {
       return (
         <div className={member.firstName}>
           <span className="name-header">{member.firstName}</span>
+          <ChoresCard tasks={member.tasks} />
         </div>
-      );
-    });
-
-    const myChores = this.state.chores.map((chore) => {
-      chore['assignedTo'] = 'Undone';
-      return (
-        <div className="draggable" draggable>{chore.name}</div>
       );
     });
 
@@ -63,8 +59,8 @@ class ChoresPage extends React.Component {
         <div>{familyContainer}</div>
         <div className="droppable" onDragOver={(e) => this.onDragOver(e)}>
           <h3>Chores List</h3>
-          {myChores}
         </div>
+        <ChoresForm chores={this.state.chores} />
 
       </div>
     );
