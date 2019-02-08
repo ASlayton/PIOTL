@@ -13,10 +13,10 @@ CREATE TABLE Users
 
 INSERT INTO Users (firstName, lastName, firebaseID, familyId, adult, earned)
 VALUES ('John', 'Smith', 'j4TP93ysDIN8ibQ7oKEBRoPWlhM2', 1, 1, 0),
-	   ('Sarah', 'Smith', 'j4TP93ysDIN8ibQ7oKEBRoPWlhM2', 1, 1, 0),
-	   ('Marv', 'Smith', 'j4TP93ysDIN8ibQ7oKEBRoPWlhM2', 1, 0, 0),
-	   ('Joe', 'Smith', 'j4TP93ysDIN8ibQ7oKEBRoPWlhM2', 1, 0, 0),
-	   ('Annie', 'Smith', 'j4TP93ysDIN8ibQ7oKEBRoPWlhM2', 1, 0, 0)
+	   ('Sarah', 'Smith', '', 1, 1, 0),
+	   ('Marv', 'Smith', '', 1, 0, 0),
+	   ('Joe', 'Smith', '', 1, 0, 0),
+	   ('Annie', 'Smith', '', 1, 0, 0)
 
 CREATE TABLE Family
 (
@@ -38,10 +38,29 @@ CREATE TABLE Chores
 
 INSERT INTO Chores (name, room, interval, worthAmt)
 VALUES ('Fold Laundry', 1, 7, 0.50),
-       ('Clean Room', 1, 7, 0.50),
-	   ('Wash Dishes', 1, 7, 0.50),
-	   ('Pick up living room', 1, 7, 0.50),
-	   ('Clean bathroom', 1, 7, 0.50)
+       ('Clean Room', 5, 7, 0.50),
+	   ('Wash Dishes', 4, 7, 0.50),
+	   ('Pick up living room', 3, 7, 0.50),
+	   ('Clean bathroom', 2, 7, 0.50),
+	   ('Weed Garden', 7, 7, 0.50),
+	   ('Mow Lawn', 8, 7, 0.50),
+	   ('Clear table', 6, 7, 0.50)
+
+CREATE TABLE Rooms
+(
+	id int IDENTITY(1,1) PRIMARY KEY,
+	name varchar(200)
+);
+
+insert into Rooms (name)
+VALUES ('Laundry Room'),
+	   ('Bathroom'),
+	   ('Living Room'),
+	   ('Kitchen'),
+	   ('Bedroom'),
+	   ('Dining Room'),
+	   ('Garden'),
+	   ('Yard')
 
 CREATE TABLE ChoresList
 (
@@ -56,21 +75,21 @@ CREATE TABLE ChoresList
 );
 
 INSERT INTO ChoresList (dateAssigned, dateDue, completed, assignedTo, assignedBy, type, familyId)
-VALUES ('2019-01-01 00:00:00', '2019-02-01 00:00:00', 0, 1, 1, 1, 1 ),
-       ('2019-01-01 00:00:00', '2019-02-07 00:00:00', 0, 2, 2, 2, 1 ),
-			 ('2019-01-01 00:00:00', '2019-02-01 00:00:00', 0, 2, 1, 1, 1 ),
-			 ('2019-01-01 00:00:00', '2019-02-01 00:00:00', 0, 3, 1, 5, 1 ),
-       ('2019-01-01 00:00:00', '2019-02-01 00:00:00', 0, 4, 1, 3, 1 ),
-			 ('2019-01-01 00:00:00', '2019-02-15 00:00:00', 0, 5, 1, 2, 1 ),
-			 ('2019-01-01 00:00:00', '2019-02-01 00:00:00', 0, 2, 1, 1, 1 ),
-       ('2019-01-01 00:00:00', '2019-02-10 00:00:00', 0, 1, 2, 3, 1 ),
-			 ('2019-01-01 00:00:00', '2019-02-01 00:00:00', 0, 3, 1, 1, 1 ),
-			 ('2019-01-01 00:00:00', '2019-02-07 00:00:00', 0, 2, 1, 2, 1 ),
-       ('2019-01-01 00:00:00', '2019-02-01 00:00:00', 0, 4, 1, 1, 1 ),
-			 ('2019-01-01 00:00:00', '2019-02-01 00:00:00', 0, 2, 1, 3, 1 ),
-			 ('2019-01-01 00:00:00', '2019-02-01 00:00:00', 0, 5, 2, 2, 1 ),
-       ('2019-01-01 00:00:00', '2019-02-01 00:00:00', 0, 2, 1, 2, 1 ),
-			 ('2019-01-01 00:00:00', '2019-02-01 00:00:00', 0, 2, 1, 4, 1 )
+VALUES ('2019-01-01', '2019-02-01', 0, 1, 1, 1, 1 ),
+       ('2019-01-01', '2019-02-07', 0, 1, 2, 2, 1 ),
+	   ('2019-01-01', '2019-02-08', 0, 1, 1, 1, 1 ),
+	   ('2019-01-01', '2019-02-08', 0, 1, 1, 5, 1 ),
+       ('2019-01-01', '2019-02-01', 0, 1, 1, 3, 1 ),
+	   ('2019-01-01', '2019-02-09', 0, 1, 1, 2, 1 ),
+	   ('2019-01-01', '2019-02-01', 0, 1, 1, 1, 1 ),
+       ('2019-01-01', '2019-02-10', 0, 1, 2, 3, 1 ),
+	   ('2019-01-01', '2019-02-01', 0, 1, 1, 1, 1 ),
+	   ('2019-01-01', '2019-02-07', 0, 1, 1, 2, 1 ),
+       ('2019-01-01', '2019-02-01', 0, 1, 1, 1, 1 ),
+	   ('2019-01-01', '2019-02-01', 0, 1, 1, 3, 1 ),
+	   ('2019-01-01', '2019-02-01', 0, 1, 2, 2, 1 ),
+       ('2019-01-01', '2019-02-01', 0, 1, 1, 2, 1 ),
+	   ('2019-01-01', '2019-02-01', 0, 1, 1, 4, 1 )
 
 CREATE TABLE Memos
 (
@@ -81,7 +100,8 @@ CREATE TABLE Memos
 );
 
 INSERT INTO Memos (UserId, message, dateCreated)
-VALUES (1, 'I am a memo.', '2019-01-01 00:00:00')
+VALUES (1, 'I am a memo.', '2019-01-01'),
+	   (1, 'I am also a memo.', '2019-01-01')
 
 CREATE TABLE Messages
 (
@@ -93,7 +113,7 @@ CREATE TABLE Messages
 );
 
 INSERT INTO Messages (sentFrom, sentTo, message, dateCreated )
-VALUES (1, 2, 'I am a message','2019-01-01 00:00:00')
+VALUES (1, 2, 'I am a message','2019-01-01')
 
 CREATE TABLE Grocery
 (
@@ -107,7 +127,7 @@ CREATE TABLE Grocery
 );
 
 INSERT INTO Grocery (name, type, quantity, addedBy, approved, dateAdded)
-VALUES ('Milk', 1, 1, 1, 0,'2019-01-01 00:00:00')
+VALUES ('Milk', 1, 1, 1, 0,'2019-01-01')
 
 Create Table GroceryType
 (
@@ -142,14 +162,6 @@ CREATE TABLE EventType
 INSERT INTO EventType (name)
 VALUES ('Birthday')
 
-CREATE TABLE Rooms
-(
-	id int IDENTITY(1,1) PRIMARY KEY,
-	name varchar(200)
-);
-
-insert into Rooms (name)
-VALUES ('Laundry Room')
 
 ALTER TABLE Users ADD FOREIGN KEY (familyId) REFERENCES Family (id);
 ALTER TABLE Chores ADD FOREIGN KEY (room) REFERENCES Rooms (id);

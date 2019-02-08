@@ -36,7 +36,7 @@ namespace PIOTL.DataAccess
             {
                 var sql = db.Query<ChoresListByUser>(@"
                               SELECT 
-                                cl.dateAssigned as DateAssigned,
+                                cl.dateDue as DateDue,
                                 cl.assignedTo as AssignedTo,
                                 cl.completed as Completed,
                                 rm.name as RoomName,

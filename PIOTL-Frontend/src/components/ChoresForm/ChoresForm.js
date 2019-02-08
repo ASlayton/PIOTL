@@ -1,17 +1,30 @@
-import './ChoresPage.css';
+import './ChoresForm.css';
 import React from 'react';
-import api from '../../api-access/api';
-import auth from '../../firebaseRequests/auth';
 
-class ChoresPage extends React.Component {
-  state = {};
+class ChoresForm extends React.Component {
+  state = {
+    chores: []
+  };
 
-  componentDidMount () {};
   render () {
+    const options = this.props.chores.map((item) => {
+      return (
+        <option value={item.name}>{item.name}</option>
+      );
+    });
     return (
-      <div>Chore Container</div>
+      <div>
+        <h1>Add a chore</h1>
+        <form action="">
+          <label htmlFor="choreDropdown">Name</label>
+          <select name="choreDropdown">
+            {options}
+          </select>
+        </form>
+      </div>
+
     );
   }
 };
 
-export default ChoresPage;
+export default ChoresForm;

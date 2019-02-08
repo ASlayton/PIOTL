@@ -11,6 +11,7 @@ class Home extends React.Component {
 
   state = {
     user: {},
+    chores: [],
   };
   userHandler = (user) => {
     this.setState({user});
@@ -24,6 +25,11 @@ class Home extends React.Component {
       })
       .catch((err) => {
         console.error('Error with user get request', err);
+      });
+    api.apiGet('Chore/')
+      .then(res => {
+        const data = res.data;
+        this.setState({chores: data});
       });
   };
 
