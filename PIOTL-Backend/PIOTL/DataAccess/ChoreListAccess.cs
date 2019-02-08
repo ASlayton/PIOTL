@@ -80,6 +80,33 @@ namespace PIOTL.DataAccess
                 return sql;
             }
         }
+        //Get all ChoresLists for certain user for the current week
+
+        public List<ChoresListByUser> GetAllChoresListbyUserToday(int userId)
+        {
+            using (var db = _db.GetConnection())
+            {
+                var myDate = DateTime.Now;
+                var sql = db.Query<ChoresListByUser>(@"
+                              SELECT 
+                                cl.dateAssigned as DateAssigned,
+                                cl.assignedTo as AssignedTo,
+                                cl.completed as Completed,
+                                rm.name as RoomName,
+                                ch.name as Type,
+                                ch.worthAmt as Worth
+                              FROM ChoresList cl
+                              JOIN Chores ch
+                                ON cl.type = ch.id
+                              JOIN Rooms rm
+                                ON ch.room = rm.id
+                              WHERE cl.assignedTo = 1
+                              AND cl.dateAssigned = @myDate
+                              AND cl.completed = 0
+                              ;", new { id = userId, myDate }).ToList();
+                return sql;
+            }
+        }
 
         // Get Single ChoresList 
         public ChoresList GetChoresListById(int ChoresListId)
