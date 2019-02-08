@@ -12,7 +12,11 @@ CREATE TABLE Users
 );
 
 INSERT INTO Users (firstName, lastName, firebaseID, familyId, adult, earned)
-VALUES ('John', 'Smith', 'j4TP93ysDIN8ibQ7oKEBRoPWlhM2', 1, 1, 0)
+VALUES ('John', 'Smith', 'j4TP93ysDIN8ibQ7oKEBRoPWlhM2', 1, 1, 0),
+	   ('Sarah', 'Smith', 'j4TP93ysDIN8ibQ7oKEBRoPWlhM2', 1, 1, 0),
+	   ('Marv', 'Smith', 'j4TP93ysDIN8ibQ7oKEBRoPWlhM2', 1, 0, 0),
+	   ('Joe', 'Smith', 'j4TP93ysDIN8ibQ7oKEBRoPWlhM2', 1, 0, 0),
+	   ('Annie', 'Smith', 'j4TP93ysDIN8ibQ7oKEBRoPWlhM2', 1, 0, 0)
 
 CREATE TABLE Family 
 (
@@ -33,7 +37,11 @@ CREATE TABLE Chores
 );
 
 INSERT INTO Chores (name, room, interval, worthAmt)
-VALUES ('Fold Laundry', 1, 7, 0.50)
+VALUES ('Fold Laundry', 1, 7, 0.50),
+       ('Clean Room', 1, 7, 0.50),
+	   ('Wash Dishes', 1, 7, 0.50),
+	   ('Pick up living room', 1, 7, 0.50),
+	   ('Clean bathroom', 1, 7, 0.50)
 
 CREATE TABLE ChoresList 
 (
