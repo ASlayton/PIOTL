@@ -1,6 +1,6 @@
 use PIOTL;
 
-CREATE TABLE Users 
+CREATE TABLE Users
 (
 	id int IDENTITY(1,1) PRIMARY KEY,
 	firstName varchar(20),
@@ -18,7 +18,7 @@ VALUES ('John', 'Smith', 'j4TP93ysDIN8ibQ7oKEBRoPWlhM2', 1, 1, 0),
 	   ('Joe', 'Smith', 'j4TP93ysDIN8ibQ7oKEBRoPWlhM2', 1, 0, 0),
 	   ('Annie', 'Smith', 'j4TP93ysDIN8ibQ7oKEBRoPWlhM2', 1, 0, 0)
 
-CREATE TABLE Family 
+CREATE TABLE Family
 (
 	id int IDENTITY(1,1) PRIMARY KEY,
 	name varchar(120)
@@ -27,7 +27,7 @@ CREATE TABLE Family
 INSERT INTO Family (name)
 VALUES ('Smith Family')
 
-CREATE TABLE Chores 
+CREATE TABLE Chores
 (
 	id int IDENTITY(1,1) PRIMARY KEY,
 	name varchar(50),
@@ -43,7 +43,7 @@ VALUES ('Fold Laundry', 1, 7, 0.50),
 	   ('Pick up living room', 1, 7, 0.50),
 	   ('Clean bathroom', 1, 7, 0.50)
 
-CREATE TABLE ChoresList 
+CREATE TABLE ChoresList
 (
 	id int IDENTITY(1,1) PRIMARY KEY,
 	dateAssigned datetime,
@@ -56,9 +56,23 @@ CREATE TABLE ChoresList
 );
 
 INSERT INTO ChoresList (dateAssigned, dateDue, completed, assignedTo, assignedBy, type, familyId)
-VALUES ('2019-01-01 00:00:00', '2019-02-01 00:00:00', 0, 2, 1, 1, 1 )
+VALUES ('2019-01-01 00:00:00', '2019-02-01 00:00:00', 0, 1, 1, 1, 1 ),
+       ('2019-01-01 00:00:00', '2019-02-07 00:00:00', 0, 2, 2, 2, 1 ),
+			 ('2019-01-01 00:00:00', '2019-02-01 00:00:00', 0, 2, 1, 1, 1 ),
+			 ('2019-01-01 00:00:00', '2019-02-01 00:00:00', 0, 3, 1, 5, 1 ),
+       ('2019-01-01 00:00:00', '2019-02-01 00:00:00', 0, 4, 1, 3, 1 ),
+			 ('2019-01-01 00:00:00', '2019-02-15 00:00:00', 0, 5, 1, 2, 1 ),
+			 ('2019-01-01 00:00:00', '2019-02-01 00:00:00', 0, 2, 1, 1, 1 ),
+       ('2019-01-01 00:00:00', '2019-02-10 00:00:00', 0, 1, 2, 3, 1 ),
+			 ('2019-01-01 00:00:00', '2019-02-01 00:00:00', 0, 3, 1, 1, 1 ),
+			 ('2019-01-01 00:00:00', '2019-02-07 00:00:00', 0, 2, 1, 2, 1 ),
+       ('2019-01-01 00:00:00', '2019-02-01 00:00:00', 0, 4, 1, 1, 1 ),
+			 ('2019-01-01 00:00:00', '2019-02-01 00:00:00', 0, 2, 1, 3, 1 ),
+			 ('2019-01-01 00:00:00', '2019-02-01 00:00:00', 0, 5, 2, 2, 1 ),
+       ('2019-01-01 00:00:00', '2019-02-01 00:00:00', 0, 2, 1, 2, 1 ),
+			 ('2019-01-01 00:00:00', '2019-02-01 00:00:00', 0, 2, 1, 4, 1 )
 
-CREATE TABLE Memos 
+CREATE TABLE Memos
 (
 	id int IDENTITY(1,1) PRIMARY KEY,
 	userId int,
@@ -69,7 +83,7 @@ CREATE TABLE Memos
 INSERT INTO Memos (UserId, message, dateCreated)
 VALUES (1, 'I am a memo.', '2019-01-01 00:00:00')
 
-CREATE TABLE Messages 
+CREATE TABLE Messages
 (
 	id int IDENTITY(1,1) PRIMARY KEY,
 	sentFrom int,
@@ -81,7 +95,7 @@ CREATE TABLE Messages
 INSERT INTO Messages (sentFrom, sentTo, message, dateCreated )
 VALUES (1, 2, 'I am a message','2019-01-01 00:00:00')
 
-CREATE TABLE Grocery 
+CREATE TABLE Grocery
 (
 	id int IDENTITY(1,1) PRIMARY KEY,
 	name varchar(20),
@@ -104,7 +118,7 @@ Create Table GroceryType
 INSERT INTO GroceryType(name)
 VALUES ('Dairy')
 
-CREATE TABLE Events 
+CREATE TABLE Events
 (
 	id int IDENTITY(1,1) PRIMARY KEY,
 	name varchar(100),
@@ -119,7 +133,7 @@ CREATE TABLE Events
 INSERT INTO Events (name, type, description, assignedTo, dateDue, timeStart, timeEnd)
 VALUES ('Lucca B-day', 1, 'Birthday party at Pump-it-up', 1, '2019-04-27 00:00:00', '2019-04-27 05:00:00', '2019-01-01 05:0:00')
 
-CREATE TABLE EventType 
+CREATE TABLE EventType
 (
 	id int IDENTITY(1,1) PRIMARY KEY,
 	name varchar(20)
@@ -128,7 +142,7 @@ CREATE TABLE EventType
 INSERT INTO EventType (name)
 VALUES ('Birthday')
 
-CREATE TABLE Rooms 
+CREATE TABLE Rooms
 (
 	id int IDENTITY(1,1) PRIMARY KEY,
 	name varchar(200)
