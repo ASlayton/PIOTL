@@ -23,23 +23,36 @@ namespace PIOTL.DataAccess
         {
             using (var db = _db.GetConnection())
             {
-                string sql = "Select * From ChoresList";
+                string sql = @"SELECT
+                                cl.id as Id,
+                                cl.dateDue as DateDue,
+                                cl.assignedTo as AssignedTo,
+                                cl.completed as Completed,
+                                rm.name as Room,
+                                ch.name as Type,
+                                ch.worthAmt as Worth
+                              FROM ChoresList cl
+                              JOIN Chores ch
+                                ON cl.type = ch.id
+                              JOIN Rooms rm
+                                ON ch.room = rm.id";
                 return db.Query<ChoresList>(sql).ToList();
             }
         }
 
         //Get all ChoresLists for certain user
 
-        public List<ChoresListByUser> GetAllChoresListbyUser(int userId)
+        public List<ChoresList> GetAllChoresListbyUser(int userId)
         {
             using (var db = _db.GetConnection())
             {
-                var sql = db.Query<ChoresListByUser>(@"
+                var sql = db.Query<ChoresList>(@"
                               SELECT 
+                                cl.id as Id,
                                 cl.dateDue as DateDue,
                                 cl.assignedTo as AssignedTo,
                                 cl.completed as Completed,
-                                rm.name as RoomName,
+                                rm.name as Room,
                                 ch.name as Type,
                                 ch.worthAmt as Worth
                               FROM ChoresList cl
@@ -65,7 +78,7 @@ namespace PIOTL.DataAccess
                                 cl.dateAssigned as DateAssigned,
                                 cl.assignedTo as AssignedTo,
                                 cl.completed as Completed,
-                                rm.name as RoomName,
+                                rm.name as Room,
                                 ch.name as Type,
                                 ch.worthAmt as Worth
                               FROM ChoresList cl
@@ -155,10 +168,12 @@ namespace PIOTL.DataAccess
                                  OUTPUT INSERTED.*
                                  VALUES
                                        (@dateAssigned
+                                       ,@dateDue
                                        ,@completed
-                                       ,@assignedBy
                                        ,@assignedTo
-                                       ,@type)", ChoresList);
+                                       ,@assignedBy
+                                       ,@type
+                                       ,@familyId)", ChoresList);
 
             }
         }
