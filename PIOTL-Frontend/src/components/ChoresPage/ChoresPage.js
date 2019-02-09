@@ -2,8 +2,8 @@ import './ChoresPage.css';
 import React from 'react';
 import api from '../../api-access/api';
 import auth from '../../firebaseRequests/auth';
-import ChoresCard from '../ChoresCard/ChoresCard';
 import ChoresForm from '../ChoresForm/ChoresForm';
+import Calendar from 'react-calendar';
 
 class ChoresPage extends React.Component {
 
@@ -11,7 +11,9 @@ class ChoresPage extends React.Component {
     user: {},
     family: [],
     chores: [],
-    choresList: []
+    choresList: [],
+    date: new Date(),
+    chosenMember: ''
   };
 
   componentDidMount () {
@@ -47,6 +49,10 @@ class ChoresPage extends React.Component {
       });
 
   }
+
+  onChange = date => this.setState({date});
+  famChange = (e) => this.setState({chosenMember: e.target.value});
+
   render () {
     const tasks = {};
     const familyContainer = this.state.family.map((member) => {
@@ -57,30 +63,44 @@ class ChoresPage extends React.Component {
         }
       });
       return (
-        <div className={member.firstName}>
-          <span className="name-header">{member.firstName}</span>
-          <ChoresCard tasks={member.tasks} />
-        </div>
+        <option value={member.firstName}>
+          {member.firstName}
+        </option>
       );
     });
 
-    const choresList = this.state.chores.map((chore) => {
+    const entireFamily = Object.keys(tasks).map((person) => {
+      const taskarray = tasks[person].map((tsk) => {
+        console.log('Task: ', tsk.id);
+        return (
+          <li>{tsk.type}</li>
+        );
+      });
       return (
-        <li>{chore.name}</li>
-      );
-    });
-
-    return (
-      <div className="container-drag">
-        <h2>Drag and Drop Chores</h2>
-
-        <div>{familyContainer}</div>
-        <div className="droppable" onDragOver={(e) => this.onDragOver(e)}>
-          <h3>Chores List</h3>
+        <div className="family-member-task-container">
+          <h3>{person}</h3>
           <ul>
-            {choresList}
+            {taskarray}
           </ul>
         </div>
+
+      );
+    });
+    console.log('Tasks: ', tasks);
+    return (
+      <div className="container">
+        <h2>Family Assignments</h2>
+        <div className="have-tasks-container">
+          {entireFamily}
+        </div>
+
+        <select name="familyMembers" id="familyDropDown" onChange={(e) => this.famChange(e)}>
+          {familyContainer}
+        </select>
+        <Calendar
+          onChange={this.onChange}
+          value={this.state.date}
+        />
         <ChoresForm chores={this.state.chores} family={this.state.family}/>
 
       </div>
