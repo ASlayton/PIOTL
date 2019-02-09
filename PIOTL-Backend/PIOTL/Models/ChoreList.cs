@@ -10,10 +10,12 @@ namespace PIOTL.Models
         public int Id { get; set; }
         public DateTime DateAssigned { get; set; }
         public DateTime DateDue { get; set; }
-        public int Completed { get; set; }
-        public double AssignedTo { get; set; }
-        public double AssignedBy { get; set; }
-        public double Type { get; set;}
+        public bool Completed { get; set; }
+        public int AssignedTo { get; set; }
+        public string Room { get; set; }
+        public int AssignedBy { get; set; }
+        public string Type { get; set;}
+        public double Worth { get; set; }
     }
 
     public class ChoresListByUser
@@ -21,8 +23,8 @@ namespace PIOTL.Models
         public int Id { get; set; }
         public int AssignedTo { get; set; }
         public DateTime DateDue { get; set; }
-        public Boolean Completed { get; set; }
-        public string RoomName { get; set; }
+        public bool Completed { get; set; }
+        public string Room { get; set; }
         public string Type { get; set; }
         public double Worth { get; set; }
     }

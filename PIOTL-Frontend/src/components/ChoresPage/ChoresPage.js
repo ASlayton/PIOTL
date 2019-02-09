@@ -2,7 +2,6 @@ import './ChoresPage.css';
 import React from 'react';
 import api from '../../api-access/api';
 import auth from '../../firebaseRequests/auth';
-import ChoresCard from '../ChoresCard/ChoresCard';
 import ChoresForm from '../ChoresForm/ChoresForm';
 
 class ChoresPage extends React.Component {
@@ -11,6 +10,7 @@ class ChoresPage extends React.Component {
     user: {},
     family: [],
     chores: [],
+    choresList: []
   };
 
   componentDidMount () {
@@ -29,6 +29,12 @@ class ChoresPage extends React.Component {
         const data = res.data;
         this.setState({chores: data});
       });
+
+    api.apiGet('ChoresList/')
+      .then(res => {
+        const data = res.data;
+        this.setState({choresList: data});
+      });
   };
 
   componentDidUpdate () {
@@ -40,27 +46,49 @@ class ChoresPage extends React.Component {
       });
 
   }
+
+  onChange = date => this.setState({date});
+  famChange = (e) => this.setState({chosenMember: e.target.value});
+
   render () {
     const tasks = {};
     const familyContainer = this.state.family.map((member) => {
       tasks[member.firstName] = [];
+      this.state.choresList.forEach((item) => {
+        if (item.assignedTo === member.id) {
+          tasks[member.firstName].push(item);
+        }
+      });
       return (
-        <div className={member.firstName}>
-          <span className="name-header">{member.firstName}</span>
-          <ChoresCard tasks={member.tasks} />
-        </div>
+        <option value={member.firstName}>
+          {member.firstName}
+        </option>
       );
     });
 
-    return (
-      <div className="container-drag">
-        <h2>Drag and Drop Chores</h2>
-
-        <div>{familyContainer}</div>
-        <div className="droppable" onDragOver={(e) => this.onDragOver(e)}>
-          <h3>Chores List</h3>
+    const entireFamily = Object.keys(tasks).map((person) => {
+      const taskarray = tasks[person].map((tsk) => {
+        return (
+          <li>{tsk.type}</li>
+        );
+      });
+      return (
+        <div className="family-member-task-container">
+          <h3>{person}</h3>
+          <ul>
+            {taskarray}
+          </ul>
         </div>
-        <ChoresForm chores={this.state.chores} />
+
+      );
+    });
+    return (
+      <div className="container">
+        <h2>Family Assignments</h2>
+        <div className="have-tasks-container">
+          {entireFamily}
+        </div>
+        <ChoresForm chores={this.state.chores} family={this.state.family} user={this.state.user}/>
 
       </div>
     );
