@@ -143,7 +143,7 @@ namespace PIOTL.DataAccess
         }
 
         // Update ChoresList
-        public bool UpdateChoresList(ChoresList ChoresList)
+        public bool UpdateChoresList(BaseChoresList ChoresList)
         {
             using (var db = _db.GetConnection())
             {
@@ -152,7 +152,8 @@ namespace PIOTL.DataAccess
                                           ,[completed] = @completed
                                           ,[assignedBy] = @assignedBy
                                           ,[assignedTo] = @assignedTo
-                                          ,[type] = @type", ChoresList);
+                                          ,[type] = @type
+                                          ,[familyId] = @familyId", ChoresList);
                 return sql == 1;
             }
         }
@@ -163,9 +164,16 @@ namespace PIOTL.DataAccess
         {
             using (var db = _db.GetConnection())
             {
-                return await db.QueryFirstOrDefaultAsync<ChoresList>(@"INSERT INTO [dbo].[ChoresList]
-                
-                                 OUTPUT INSERTED.*
+                return await db.QueryFirstOrDefaultAsync<ChoresList>(@"
+                                 INSERT INTO [dbo].[ChoresList]
+                                        (
+                                        [dateAssigned]
+                                        ,[dateDue]
+                                        ,[completed]
+                                        ,[assignedTo]
+                                        ,[assignedBy]
+                                        ,[type]
+                                        ,[familyId])
                                  VALUES
                                        (@dateAssigned
                                        ,@dateDue

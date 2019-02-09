@@ -1,16 +1,21 @@
 import './ToDo.css';
 import React from 'react';
-import apiAccess from '../../api-access/api';
+import api from '../../api-access/api';
 const moment = require('moment');
-// IF NOT SIGNED IN, USER IS DIRECTED HERE
+
 class ToDo extends React.Component {
-  state = {
-    Chores: [],
-  };
+  constructor (props) {
+    super(props);
+    this.updateChore = this.updateChore.bind(this);
+    this.state = {
+      Chores: [],
+      updatedChore: {}
+    };
+  }
 
   componentDidUpdate = () => {
     if (!this.props.user || this.state.Chores.length) return;
-    apiAccess.apiGet('ChoresList/ChoresListByUser/' + this.props.user.id)
+    api.apiGet('ChoresList/ChoresListByUser/' + this.props.user.id)
       .then(res => {
         const currentChores = [];
         res.data.forEach((chore) => {
@@ -25,14 +30,56 @@ class ToDo extends React.Component {
       });
   }
 
+  getTypeId = (typeName) => {
+    let myValue = 0;
+    console.log('props: ', this.props);
+    this.props.chores.forEach((chore) => {
+      if (chore.name === typeName) {
+        myValue = chore.id;
+      }
+    });
+    return myValue;
+  }
+
+  updateChore = (id, e) => {
+    const myValue = e.target.checked;
+    const newChore = {...this.state.Chores};
+    let updatedChore = {};
+    for (let i = 0; i < Object.keys(newChore).length; i++) {
+      if (newChore[i].id === id) {
+        const newType = this.getTypeId(newChore[i].type);
+        updatedChore = {
+          'id': newChore[i].id,
+          'dateAssigned': newChore[i].dateAssigned,
+          'dateDue': newChore[i].dateDue,
+          'completed': myValue,
+          'type': newType,
+          'assignedTo': newChore[i].assignedTo,
+          'assignedBy': newChore[i].assignedBy,
+          'familyId': this.props.user.familyId
+        };
+      };
+      console.log(updatedChore);
+      this.setState({updatedChore});
+    };
+
+    api.apiPut('ChoresList', this.state.updatedChore)
+      .then(res => {
+        console.log('Successful update to choreslist', res);
+      })
+      .catch((err) => {
+        console.error('There was an error in put request to Choreslist', err);
+      });
+  };
+
   render () {
     let count = 1;
     const ToDoList = this.state.Chores.map((ToDo) => {
       count++;
       return (
-        <li className="ToDoToday-container" key={'ToDoToday' + count}>
+        <li className='ToDoToday-container' key={'ToDoToday' + count}>
           <div>
-            <p>{ToDo.assignedTo}</p>
+            <input type='checkbox' name={'today' + count} value={ToDo.type + ':' + ToDo.dateDue} onChange={(e) => this.updateChore(ToDo.id, e)}/>
           </div>
           <div>
             <p>{ToDo.type}</p>
