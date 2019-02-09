@@ -16,6 +16,10 @@ class Home extends React.Component {
   userHandler = (user) => {
     this.setState({user});
   }
+  choreHandler = (chores) => {
+    this.setState({chores});
+  };
+
   componentDidMount () {
     const id = auth.getUid();
     api.apiGet('User/' + id)
@@ -37,9 +41,20 @@ class Home extends React.Component {
     return (
       <div>
         <div>
-          <Memo user={this.state.user} userHandler={this.userHandler}/>
-          <ToDo user={this.state.user}/>
-          <ToDoWeek user={this.state.user}/>
+          <Memo
+            user={this.state.user}
+            userHandler={this.userHandler}
+          />
+          <ToDo
+            user={this.state.user}
+            chores={this.state.chores}
+            choreHandler={this.choreHandler}
+          />
+          <ToDoWeek
+            user={this.state.user}
+            chores={this.state.chores}
+            choreHandler={this.choreHandler}
+          />
         </div>
       </div>
     );
