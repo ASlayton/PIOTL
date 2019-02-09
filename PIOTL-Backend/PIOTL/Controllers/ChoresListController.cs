@@ -77,7 +77,7 @@ namespace PIOTL.Controllers
         }
 
         [HttpPut("ChoresList")]
-        public IActionResult UpdateChoresList(ChoresList ChoresList)
+        public IActionResult UpdateChoresList(BaseChoresList ChoresList)
         {
             var ChoresLists = _ChoresList.UpdateChoresList(ChoresList);
             return Ok();

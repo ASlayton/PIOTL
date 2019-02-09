@@ -48,7 +48,6 @@ class ToDo extends React.Component {
     for (let i = 0; i < Object.keys(newChore).length; i++) {
       if (newChore[i].id === id) {
         const newType = this.getTypeId(newChore[i].type);
-        console.log('type id: ', newType);
         updatedChore = {
           'id': newChore[i].id,
           'dateAssigned': newChore[i].dateAssigned,
@@ -56,6 +55,7 @@ class ToDo extends React.Component {
           'completed': myValue,
           'type': newType,
           'assignedTo': newChore[i].assignedTo,
+          'assignedBy': newChore[i].assignedBy,
           'familyId': this.props.user.familyId
         };
       };
