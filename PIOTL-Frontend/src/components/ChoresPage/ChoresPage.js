@@ -10,8 +10,7 @@ class ChoresPage extends React.Component {
     user: {},
     family: [],
     chores: [],
-    choresList: [],
-    chosenMember: ''
+    choresList: []
   };
 
   componentDidMount () {
@@ -69,7 +68,6 @@ class ChoresPage extends React.Component {
 
     const entireFamily = Object.keys(tasks).map((person) => {
       const taskarray = tasks[person].map((tsk) => {
-        console.log('Task: ', tsk.id);
         return (
           <li>{tsk.type}</li>
         );
@@ -84,18 +82,13 @@ class ChoresPage extends React.Component {
 
       );
     });
-    console.log('Tasks: ', tasks);
     return (
       <div className="container">
         <h2>Family Assignments</h2>
         <div className="have-tasks-container">
           {entireFamily}
         </div>
-
-        <select name="familyMembers" id="familyDropDown" onChange={(e) => this.famChange(e)}>
-          {familyContainer}
-        </select>
-        <ChoresForm chores={this.state.chores} family={this.state.family}/>
+        <ChoresForm chores={this.state.chores} family={this.state.family} user={this.state.user}/>
 
       </div>
     );
