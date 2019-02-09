@@ -1,11 +1,14 @@
 import './ChoresForm.css';
 import React from 'react';
+import Calendar from 'react-calendar';
 
 class ChoresForm extends React.Component {
   state = {
-    chores: []
+    chores: [],
+    date: new Date(),
   };
-
+  onChange = date => this.setState({date});
+  famChange = (e) => this.setState({chosenMember: e.target.value});
   render () {
     const options = this.props.chores.map((item) => {
       return (
@@ -22,6 +25,10 @@ class ChoresForm extends React.Component {
       <div>
         <h1>Add a chore</h1>
         <form action="">
+          <Calendar
+            onChange={this.onChange}
+            value={this.state.date}
+          />
           <label htmlFor="choreDropdown">Name</label>
           <select name="choreDropdown">
             {options}

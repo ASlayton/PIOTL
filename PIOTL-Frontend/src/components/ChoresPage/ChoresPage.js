@@ -3,7 +3,6 @@ import React from 'react';
 import api from '../../api-access/api';
 import auth from '../../firebaseRequests/auth';
 import ChoresForm from '../ChoresForm/ChoresForm';
-import Calendar from 'react-calendar';
 
 class ChoresPage extends React.Component {
 
@@ -12,7 +11,6 @@ class ChoresPage extends React.Component {
     family: [],
     chores: [],
     choresList: [],
-    date: new Date(),
     chosenMember: ''
   };
 
@@ -97,10 +95,6 @@ class ChoresPage extends React.Component {
         <select name="familyMembers" id="familyDropDown" onChange={(e) => this.famChange(e)}>
           {familyContainer}
         </select>
-        <Calendar
-          onChange={this.onChange}
-          value={this.state.date}
-        />
         <ChoresForm chores={this.state.chores} family={this.state.family}/>
 
       </div>
