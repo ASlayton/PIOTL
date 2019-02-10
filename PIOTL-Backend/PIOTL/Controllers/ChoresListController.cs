@@ -84,9 +84,9 @@ namespace PIOTL.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<ChoresList>> PostChoresList(ChoresList ChoresList)
+        public async Task<ActionResult<ChoresList>> PostChoresList(BaseChoresList BaseChoresList)
         {
-            return Ok(await _ChoresList.PostChoresList(ChoresList));
+            return Ok(await _ChoresList.PostChoresList(BaseChoresList));
         }
     }
 }

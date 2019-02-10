@@ -5,11 +5,15 @@ import api from '../../api-access/api';
 const moment = require('moment');
 
 class ChoresForm extends React.Component {
-  state = {
-    date: new Date(),
-    chosenMember: '',
-    chosenChore: ''
-  };
+  constructor (props) {
+    super(props);
+    this.state = {
+      date: new Date(),
+      chosenMember: '',
+      chosenChore: ''
+    };
+    this.assignChore = this.assignChore.bind(this);
+  }
 
   getmemberId = () => {
     let myid = 0;
@@ -36,8 +40,8 @@ class ChoresForm extends React.Component {
     const member = this.getmemberId();
     const typeid = this.getTypeId();
     const newChore = {
-      dateAssigned: moment(),
-      dateDue: this.state.date,
+      dateAssigned: moment().format('YYYY-MM-DD'),
+      dateDue: moment(this.state.date).format('YYYY-MM-DD'),
       completed: false,
       assignedTo: member,
       assignedBy: this.props.user.id,
@@ -45,11 +49,14 @@ class ChoresForm extends React.Component {
       familyId: this.props.user.id
     };
     console.log('My chore: ', newChore);
-    api.apiPost('ChoresList', newChore)
+    api.apiPost('ChoresList/', newChore)
       .then(res => {
         console.log('Successful post.', res);
+        this.props.choresListUpdate();
       })
-      .catch(err => console.error('New chore was not posted to ChoresList', err));
+      .catch(err => {
+        console.error('New chore was not posted to ChoresList', err);
+      });
 
   };
 

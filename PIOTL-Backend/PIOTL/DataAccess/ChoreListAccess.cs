@@ -162,11 +162,11 @@ namespace PIOTL.DataAccess
 
         // Post new ChoresList
 
-        public async Task<ChoresList> PostChoresList(ChoresList ChoresList)
+        public async Task<BaseChoresList> PostChoresList(BaseChoresList BaseChoresList)
         {
             using (var db = _db.GetConnection())
             {
-                return await db.QueryFirstOrDefaultAsync<ChoresList>(@"
+                return await db.QueryFirstOrDefaultAsync<BaseChoresList>(@"
                                  INSERT INTO [dbo].[ChoresList]
                                         (
                                         [dateAssigned]
@@ -183,7 +183,7 @@ namespace PIOTL.DataAccess
                                        ,@assignedTo
                                        ,@assignedBy
                                        ,@type
-                                       ,@familyId)", ChoresList);
+                                       ,@familyId)", BaseChoresList);
 
             }
         }

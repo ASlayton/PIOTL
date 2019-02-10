@@ -44,9 +44,14 @@ class ChoresPage extends React.Component {
         const data = res.data;
         this.setState({family: data});
       });
-
   }
-
+  choresListUpdate = () => {
+    api.apiGet('ChoresList/')
+      .then(res => {
+        const data = res.data;
+        this.setState({choresList: data});
+      });
+  };
   onChange = date => this.setState({date});
   famChange = (e) => this.setState({chosenMember: e.target.value});
 
@@ -65,7 +70,7 @@ class ChoresPage extends React.Component {
         </option>
       );
     });
-
+    console.log('Stop erroring on this: ', familyContainer);
     const entireFamily = Object.keys(tasks).map((person) => {
       const taskarray = tasks[person].map((tsk) => {
         return (
@@ -88,7 +93,7 @@ class ChoresPage extends React.Component {
         <div className="have-tasks-container">
           {entireFamily}
         </div>
-        <ChoresForm chores={this.state.chores} family={this.state.family} user={this.state.user}/>
+        <ChoresForm chores={this.state.chores} family={this.state.family} user={this.state.user} choresList={this.state.choresList} updateChoresList={this.choresListUpdate}/>
 
       </div>
     );
