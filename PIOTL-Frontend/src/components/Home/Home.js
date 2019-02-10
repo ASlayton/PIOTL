@@ -3,6 +3,7 @@ import React from 'react';
 import Memo from '../Memo/Memo';
 import ToDo from '../ToDo/ToDo';
 import ToDoWeek from '../ToDoWeek/ToDoWeek';
+import PastDue from '../PastDue/PastDue';
 import api from '../../api-access/api';
 import auth from '../../firebaseRequests/auth';
 
@@ -44,6 +45,11 @@ class Home extends React.Component {
           <Memo
             user={this.state.user}
             userHandler={this.userHandler}
+          />
+          <PastDue
+            user={this.state.user}
+            chores={this.state.chores}
+            choreHandler={this.choreHandler}
           />
           <ToDo
             user={this.state.user}
