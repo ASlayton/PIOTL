@@ -50,6 +50,7 @@ namespace PIOTL.DataAccess
                               SELECT 
                                 cl.id as Id,
                                 cl.dateDue as DateDue,
+                                cl.dateAssigned as dateAssigned,
                                 cl.assignedTo as AssignedTo,
                                 cl.completed as Completed,
                                 rm.name as Room,
@@ -148,12 +149,13 @@ namespace PIOTL.DataAccess
             using (var db = _db.GetConnection())
             {
                 var sql = db.Execute(@"UPDATE [dbo].[ChoresList]
-                                       SET [dateAssigned] = @dateAssigned
+                                       SET [dateAssigned] = @DateAssigned
                                           ,[completed] = @completed
                                           ,[assignedBy] = @assignedBy
                                           ,[assignedTo] = @assignedTo
                                           ,[type] = @type
-                                          ,[familyId] = @familyId", ChoresList);
+                                          ,[familyId] = @familyId
+                                       WHERE ChoresList.id = @id", ChoresList);
                 return sql == 1;
             }
         }
