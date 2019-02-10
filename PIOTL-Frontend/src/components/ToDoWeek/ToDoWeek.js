@@ -93,7 +93,6 @@ class ToDoWeek extends React.Component {
     render () {
       let count = 1;
       const ToDoWeekList = this.state.Chores.map((ToDoWeek) => {
-        console.log('ToDoWeek type: ', ToDoWeek.type);
         count++;
         return (
           <li className='ToDoWeekToday-container' key={'ToDoWeekToday' + count}>
