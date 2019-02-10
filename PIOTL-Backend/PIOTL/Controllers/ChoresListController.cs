@@ -76,14 +76,14 @@ namespace PIOTL.Controllers
             return BadRequest(new { Message = "Delete was unsuccessful" });
         }
 
-        [HttpPut("ChoresList")]
+        [HttpPut]
         public IActionResult UpdateChoresList(BaseChoresList ChoresList)
         {
             var ChoresLists = _ChoresList.UpdateChoresList(ChoresList);
             return Ok();
         }
 
-        [HttpPost("ChoresList")]
+        [HttpPost]
         public async Task<ActionResult<ChoresList>> PostChoresList(ChoresList ChoresList)
         {
             return Ok(await _ChoresList.PostChoresList(ChoresList));

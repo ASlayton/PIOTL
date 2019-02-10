@@ -26,7 +26,7 @@ class Login extends React.Component {
     // Send user to firebase auth method
     fb.auth.loginUser(user)
       .then((response) => {
-        api.apiGet(`user/login/${response.user.uid}`)
+        api.apiGet(`user/${response.user.uid}`)
           .then(apiResponse => this.props.signin(apiResponse.data))
           .catch(err => console.error(err));
         this.props.history.push('/');

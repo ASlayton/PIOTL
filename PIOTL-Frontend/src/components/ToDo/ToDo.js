@@ -1,6 +1,7 @@
 import './ToDo.css';
 import React from 'react';
 import api from '../../api-access/api';
+import Alert from 'react-bootstrap/Alert';
 const moment = require('moment');
 
 class ToDo extends React.Component {
@@ -26,13 +27,16 @@ class ToDo extends React.Component {
         this.setState({Chores: currentChores});
       })
       .catch((err) => {
-        console.error('Error with ToDo get request', err);
+        return (
+          <Alert variant='danger'>
+            There was an error in retrieving Choreslist.
+          </Alert>
+        );
       });
   }
 
   getTypeId = (typeName) => {
     let myValue = 0;
-    console.log('props: ', this.props);
     this.props.chores.forEach((chore) => {
       if (chore.name === typeName) {
         myValue = chore.id;
@@ -59,45 +63,57 @@ class ToDo extends React.Component {
           'familyId': this.props.user.familyId
         };
       };
-      console.log(updatedChore);
-      this.setState({updatedChore});
+      this.pushThisShit(updatedChore);
+      this.setState({updatedChore: updatedChore});
     };
-
-    api.apiPut('ChoresList', this.state.updatedChore)
-      .then(res => {
-        console.log('Successful update to choreslist', res);
-      })
-      .catch((err) => {
-        console.error('There was an error in put request to Choreslist', err);
-      });
   };
 
-  render () {
-    let count = 1;
-    const ToDoList = this.state.Chores.map((ToDo) => {
-      count++;
+    pushThisShit = (myObject) => {
+      api.apiPut('ChoresList', myObject)
+        .then(res => {
+          console.log('Success in updating choreslist');
+          return (
+            <Alert variant='success'>
+              Successfully updated choreslist.
+            </Alert>
+          );
+        })
+        .catch((err) => {
+          console.error('Success in updating choreslist', err);
+          return (
+            <Alert variant='danger'>
+              There was an error while updating choreslist.
+            </Alert>
+          );
+        });
+    };
+
+    render () {
+      let count = 1;
+      const ToDoList = this.state.Chores.map((ToDo) => {
+        count++;
+        return (
+          <li className='ToDoToday-container' key={'ToDoToday' + count}>
+            <div>
+              <input type='checkbox' name={'today' + count} value={ToDo.type} defaultChecked={ToDo.completed} onChange={(e) => this.updateChore(ToDo.id, e) }/>
+            </div>
+            <div>
+              <p>{ToDo.type}</p>
+            </div>
+          </li>
+        );
+      });
       return (
-        <li className='ToDoToday-container' key={'ToDoToday' + count}>
-          <div>
-            <input type='checkbox' name={'today' + count} value={ToDo.type + ':' + ToDo.dateDue} onChange={(e) => this.updateChore(ToDo.id, e)}/>
-          </div>
-          <div>
-            <p>{ToDo.type}</p>
-          </div>
-        </li>
-      );
-    });
-    return (
-      <div>
         <div>
-          <h1>To Do Today</h1>
+          <div>
+            <h1>To Do Today</h1>
+          </div>
+          <ul>
+            {ToDoList}
+          </ul>
         </div>
-        <ul>
-          {ToDoList}
-        </ul>
-      </div>
-    );
-  }
+      );
+    }
 };
 
 export default ToDo;
