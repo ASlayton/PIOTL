@@ -1,7 +1,6 @@
 import './ToDoWeek.css';
 import React from 'react';
 import api from '../../api-access/api';
-import Alert from 'react-bootstrap/Alert';
 const moment = require('moment');
 
 class ToDoWeek extends React.Component {
@@ -29,11 +28,6 @@ class ToDoWeek extends React.Component {
         this.setState({Chores: currentChores});
       })
       .catch((err) => {
-        return (
-          <Alert variant='danger'>
-            There was an error in retrieving Choreslist.
-          </Alert>
-        );
       });
   }
 
@@ -74,19 +68,9 @@ class ToDoWeek extends React.Component {
       api.apiPut('ChoresList', myObject)
         .then(res => {
           console.log('Success in updating choreslist');
-          return (
-            <Alert variant='success'>
-              Successfully updated choreslist.
-            </Alert>
-          );
         })
         .catch((err) => {
           console.error('Success in updating choreslist', err);
-          return (
-            <Alert variant='danger'>
-              There was an error while updating choreslist.
-            </Alert>
-          );
         });
     };
 

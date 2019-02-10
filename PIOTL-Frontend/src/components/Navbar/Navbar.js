@@ -6,15 +6,9 @@ class Navbar extends React.Component {
   render () {
 
     return (
-      <nav className="navbar">
-        <div className="container-fluid">
-          <div className="navbar-header">
-          </div>
-          <div className="collapse navbar-collapse" id="myNavbar">
-            <Link to="/ChoresPage">Chores</Link>
-          </div>
-        </div>
-      </nav>
+      <div className="">
+        <Link to="/ChoresPage">Chores</Link>
+      </div>
     );
   }
 }

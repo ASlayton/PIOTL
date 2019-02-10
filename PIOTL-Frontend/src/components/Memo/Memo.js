@@ -2,7 +2,6 @@ import './Memo.css';
 import React from 'react';
 import apiAccess from '../../api-access/api';
 import api from '../../api-access/api';
-import Alert from 'react-bootstrap/Alert';
 
 // IF NOT SIGNED IN, USER IS DIRECTED HERE
 class Memo extends React.Component {
@@ -41,11 +40,6 @@ class Memo extends React.Component {
       })
       .catch (err => {
         console.error('There was an issue with deleting memo');
-        return (
-          <Alert>
-            There was an issue while deleting from memoList.
-          </Alert>
-        );
       });
   };
 
