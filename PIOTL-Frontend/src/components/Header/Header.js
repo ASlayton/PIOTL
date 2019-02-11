@@ -11,35 +11,35 @@ class Navbar extends React.Component {
       wentAway();
     };
     return (
-      <nav className="navbar">
-        <div className="container-fluid">
-          <div className="navbar-header">
-            <h1 className="app-name">Put It On The List</h1>
+      <div className="">
+        <div className="">
+          <div className="">
+            <h1 className="">Put It On The List</h1>
           </div>
-          <div className="collapse navbar-collapse" id="myNavbar">
+          <div className="" id="">
             {
               authed ? (
-                <ul className="nav navbar-nav navbar-right">
+                <ul className="">
                   <li>
-                    <button
+                    <div
                       onClick={logoutClickEvent}
-                      className="btn btn-warning"
+                      className=""
                     >
                       <Link to="/LandingPage">Logout</Link>
-                    </button>
+                    </div>
                   </li>
                 </ul>
               ) : (
-                <ul className="nav navbar-nav navbar-right" hidden>
-                  <button className="btn btn-warning">
-                    <Link to="/login" className="login-btn">Login!</Link>
+                <ul className="" hidden>
+                  <button className="">
+                    <Link to="/login" className="">Login!</Link>
                   </button>
                 </ul>
               )
             }
           </div>
         </div>
-      </nav>
+      </div>
     );
   }
 }

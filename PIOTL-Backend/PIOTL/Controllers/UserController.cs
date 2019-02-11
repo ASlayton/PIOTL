@@ -62,14 +62,14 @@ namespace PIOTL.Controllers
             return BadRequest(new { Message = "Delete was unsuccessful" });
         }
 
-        [HttpPut("User")]
+        [HttpPut]
         public IActionResult UpdateUser(User User)
         {
             var Users = _User.UpdateUser(User);
             return Ok();
         }
 
-        [HttpPost("User")]
+        [HttpPost]
         public async Task<ActionResult<User>> PostUser(User User)
         {
             return Ok(await _User.PostUser(User));

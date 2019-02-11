@@ -85,10 +85,9 @@ namespace PIOTL.DataAccess
                 
                                  OUTPUT INSERTED.*
                                  VALUES
-                                       (@userId
-                                       ,@firstName
+                                       (@firstName
                                        ,@lastName
-                                       ,@firebaseUID
+                                       ,@firebaseID
                                        ,@familyId
                                        ,@adult
                                        ,@earned)", User);
