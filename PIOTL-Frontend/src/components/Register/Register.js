@@ -99,6 +99,27 @@ class Register extends React.Component {
     this.setState({familyId: familyId});
   };
 
+  postMyFamily = () => {
+    const familyName = {};
+    familyName.name = this.state.familyName;
+    api.apiPost('Family', familyName)
+      .then((res) => {
+        api.apiGet('Family/Family/' + familyName.name)
+          .then((res) => {
+            this.setState({familyId: res.data.id});
+          })
+          .catch((err) => {
+            console.error(
+              'There was an error in retreiving family id', err
+            );
+          });
+      })
+      .catch((err) => {
+        console.error('There was an error in posting family name', err);
+      });
+
+  }
+
   render () {
     return (
       <div className='LoginForm'>
@@ -140,6 +161,7 @@ class Register extends React.Component {
                     ) : <div>
                       <input type="text" placeholder="Insert Family Id Number" onChange={this.haveFamilyIdHandler} hidden />
                       <input type="text" placeholder="Enter your family name"  onChange={this.haveFamilyNameHandler} />
+                      <button onClick={this.postMyFamily}>Create Family Entry</button>
                     </div>
                   }
                 </div>
