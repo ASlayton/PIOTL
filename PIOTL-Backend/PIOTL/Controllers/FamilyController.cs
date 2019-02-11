@@ -35,5 +35,11 @@ namespace PIOTL.Controllers
             var family = _Family.GetFamilyByName(name);
             return Ok(family);
         }
+
+        [HttpPost]
+        public async Task<ActionResult<Family>> PostFamily(Family Family)
+        {
+            return Ok(await _Family.PostFamily(Family));
+        }
     }
 }

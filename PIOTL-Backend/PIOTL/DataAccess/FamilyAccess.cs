@@ -35,5 +35,20 @@ namespace PIOTL.DataAccess
                 return sql;
             }
         }
+
+        // Post new family
+
+        public async Task<Family> PostFamily(Family Family)
+        {
+            using (var db = _db.GetConnection())
+            {
+                return await db.QueryFirstOrDefaultAsync<Family>(@"INSERT INTO [dbo].[Family]
+                
+                                 OUTPUT INSERTED.*
+                                 VALUES
+                                       (@name)", Family);
+
+            }
+        }
     }
 }
