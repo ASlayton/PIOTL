@@ -68,7 +68,7 @@ class ChoresPage extends React.Component {
         const newType = this.getTypeId(newChore[i].type);
         updatedChore = {
           'id': newChore[i].id,
-          'dateAssigned': newChore[i].dateAssigned,
+          'dateAssigned': moment().format('YYYY-MM-DD h:mm A'),
           'dateDue': newChore[i].dateDue,
           'completed': myValue,
           'type': newType,
@@ -77,10 +77,9 @@ class ChoresPage extends React.Component {
           'familyId': this.state.user.familyId
         };
       };
-      console.log('Updated chore: ', updatedChore);
-      // this.pushThisShit(updatedChore);
-      this.setState({updatedChore: updatedChore});
     };
+    this.pushThisShit(updatedChore);
+    this.setState({updatedChore: updatedChore});
   };
 
   pushThisShit = (myObject) => {
@@ -127,20 +126,22 @@ class ChoresPage extends React.Component {
       const friday = [];
       const saturday = [];
       const sunday = [];
+      const startDate = moment().startOf('week');
+      const endDate = moment().endOf('week');
       tasks[person].forEach((tsk) => {
-        if (moment(tsk.dateDue).day() === 0) {
+        if (moment(tsk.dateDue).day() === 0 && moment(tsk.dateDue).isBetween(startDate, endDate)) {
           sunday.push(tsk);
-        } else if (moment(tsk.dateDue).day() === 1) {
+        } else if (moment(tsk.dateDue).day() === 1 && moment(tsk.dateDue).isBetween(startDate, endDate)) {
           monday.push(tsk);
-        } else if (moment(tsk.dateDue).day() === 2) {
+        } else if (moment(tsk.dateDue).day() === 2 && moment(tsk.dateDue).isBetween(startDate, endDate)) {
           tuesday.push(tsk);
-        } else if (moment(tsk.dateDue).day() === 3) {
+        } else if (moment(tsk.dateDue).day() === 3 && moment(tsk.dateDue).isBetween(startDate, endDate)) {
           wednesday.push(tsk);
-        } else if (moment(tsk.dateDue).day() === 4) {
+        } else if (moment(tsk.dateDue).day() === 4 && moment(tsk.dateDue).isBetween(startDate, endDate)) {
           thursday.push(tsk);
-        } else if (moment(tsk.dateDue).day() === 5) {
+        } else if (moment(tsk.dateDue).day() === 5 && moment(tsk.dateDue).isBetween(startDate, endDate)) {
           friday.push(tsk);
-        } else if (moment(tsk.dateDue).day() === 6) {
+        } else if (moment(tsk.dateDue).day() === 6 && moment(tsk.dateDue).isBetween(startDate, endDate)) {
           saturday.push(tsk);
         };
       });
