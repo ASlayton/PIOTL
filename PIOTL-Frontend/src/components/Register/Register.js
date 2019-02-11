@@ -43,7 +43,8 @@ class Register extends React.Component {
           familyId: this.state.familyId,
           earned: 0
         };
-        api.apiPost('user/register', newCustomer)
+        console.log('New Customer: ', newCustomer);
+        api.apiPost('User', newCustomer)
           .then(response => {
             console.log('I have posted: ', response);
             this.props.signin(response.data);
@@ -76,13 +77,13 @@ class Register extends React.Component {
 
   isChildHandler1 = (e) => {
     if (e.target.value) {
-      this.setState({isChild: true});
+      this.setState({isChild: false});
     }
   };
 
   isChildHandler2 = (e) => {
     if (e.target.value) {
-      this.setState({isChild: false});
+      this.setState({isChild: true});
     }
   };
 
@@ -93,7 +94,7 @@ class Register extends React.Component {
   };
 
   haveFamilyIdHandler = (e) => {
-    const familyId = e.target.value;
+    const familyId = parseInt(e.target.value);
     this.setState({familyName: ''});
     this.setState({familyId: familyId});
   };
@@ -125,14 +126,21 @@ class Register extends React.Component {
                 <div className="form-group col">
                   <p>Is your family already registered?</p>
                   <input type="radio" id="havefamily-yes" name="family" onChange={this.changeHandler1}/>
-                  <label htmlFor="haveFamily_yes">Yes</label>
+                  <label htmlFor="haveFamily-yes">Yes</label>
 
                   <input type="radio" id="havefamily-no" name="family" onChange={this.changeHandler2}/>
                   <label htmlFor="haveFamily_no">No</label>
                   {
                     this.state.haveFamily ? (
-                      <input type="text" placeholder="Insert Family Id Number" onChange={this.haveFamilyNameHandler} />
-                    ) : <input type="text" placeholder="Enter your family name"  onChange={this.haveFamilyIdHandler} />
+                      <div>
+                        <input type="text" placeholder="Insert Family Id Number" onChange={this.haveFamilyIdHandler} />
+                        <input type="text" placeholder="Enter your family name"  onChange={this.haveFamilyNameHandler} hidden />
+                      </div>
+
+                    ) : <div>
+                      <input type="text" placeholder="Insert Family Id Number" onChange={this.haveFamilyIdHandler} hidden />
+                      <input type="text" placeholder="Enter your family name"  onChange={this.haveFamilyNameHandler} />
+                    </div>
                   }
                 </div>
               </div>
