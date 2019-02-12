@@ -2,6 +2,7 @@ import './Memo.css';
 import React from 'react';
 import apiAccess from '../../api-access/api';
 import api from '../../api-access/api';
+import MemoForm from './MemoForm';
 
 // IF NOT SIGNED IN, USER IS DIRECTED HERE
 class Memo extends React.Component {
@@ -11,6 +12,12 @@ class Memo extends React.Component {
     this.state = {
       memos: [],
     };
+  };
+
+  updateMemos = (newMemo) => {
+    const memos = [...this.state.memos];
+    memos.push(newMemo);
+    this.setState({memos});
   };
 
   componentDidUpdate = () => {
@@ -68,6 +75,9 @@ class Memo extends React.Component {
         <ul>
           {memoList}
         </ul>
+        <div>
+          <MemoForm user={this.props.user} updateMemos={this.updateMemos}/>
+        </div>
       </div>
     );
   }
