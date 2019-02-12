@@ -39,21 +39,7 @@ namespace PIOTL.Controllers
         [HttpGet("ChoresListByUser/{id}")]
         public IActionResult GetAllChoresListsByUser(int id)
         {
-            var choresListByUser = _ChoresList.GetAllChoresListbyUser(id);
-            return Ok(choresListByUser);
-        }
-
-        [HttpGet("ChoresListByUserWeek/{id}")]
-        public IActionResult GetAllChoresListsByUserWeek(int id)
-        {
-            var choresListByUser = _ChoresList.GetAllChoresListbyUserWeek(id);
-            return Ok(choresListByUser);
-        }
-
-        [HttpGet("ChoresListByUserToday/{id}")]
-        public IActionResult GetAllChoresListsByUserToday(int id)
-        {
-            var choresListByUser = _ChoresList.GetAllChoresListbyUserToday(id);
+            var choresListByUser = _ChoresList.GetAllChoresListsbyUser(id);
             return Ok(choresListByUser);
         }
 
