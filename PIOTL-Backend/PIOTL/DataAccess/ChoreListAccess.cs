@@ -42,40 +42,14 @@ namespace PIOTL.DataAccess
 
         //Get all ChoresLists for certain user
 
-        public List<ChoresList> GetAllChoresListbyUser(int userId)
+        public List<ChoresListByUser> GetAllChoresListsbyUser(int userId)
         {
             using (var db = _db.GetConnection())
             {
-                var sql = db.Query<ChoresList>(@"
+                var sql = db.Query<ChoresListByUser>(@"
                               SELECT 
                                 cl.id as Id,
                                 cl.dateDue as DateDue,
-                                cl.dateAssigned as dateAssigned,
-                                cl.assignedTo as AssignedTo,
-                                cl.completed as Completed,
-                                rm.name as Room,
-                                ch.name as Type,
-                                ch.worthAmt as Worth
-                              FROM ChoresList cl
-                              JOIN Chores ch
-                                ON cl.type = ch.id
-                              JOIN Rooms rm
-                                ON ch.room = rm.id
-                              WHERE cl.assignedTo = 1;", new { id = userId }).ToList();
-                return sql;
-            }
-        }
-
-        //Get all ChoresLists for certain user for the current week
-
-        public List<ChoresListByUser> GetAllChoresListbyUserWeek(int userId)
-        {
-            using (var db = _db.GetConnection())
-            {
-                var myStart = DateTime.Now.FirstDayOfWeek();
-                var myEnd = DateTime.Now.LastDayOfWeek();
-                var sql = db.Query<ChoresListByUser>(@"
-                              SELECT 
                                 cl.dateAssigned as DateAssigned,
                                 cl.assignedTo as AssignedTo,
                                 cl.completed as Completed,
@@ -87,40 +61,12 @@ namespace PIOTL.DataAccess
                                 ON cl.type = ch.id
                               JOIN Rooms rm
                                 ON ch.room = rm.id
-                              WHERE cl.assignedTo = 1
-                              AND cl.dateAssigned between @myStart and @myEnd
-                              AND cl.completed = 0
-                              ;", new { id = userId, myStart = myStart, myEnd = myEnd }).ToList();
+                              WHERE cl.assignedTo = @id;", new { id = userId }).ToList();
                 return sql;
             }
         }
-        //Get all ChoresLists for certain user for the current week
 
-        public List<ChoresListByUser> GetAllChoresListbyUserToday(int userId)
-        {
-            using (var db = _db.GetConnection())
-            {
-                var myDate = DateTime.Now;
-                var sql = db.Query<ChoresListByUser>(@"
-                              SELECT 
-                                cl.dateAssigned as DateAssigned,
-                                cl.assignedTo as AssignedTo,
-                                cl.completed as Completed,
-                                rm.name as RoomName,
-                                ch.name as Type,
-                                ch.worthAmt as Worth
-                              FROM ChoresList cl
-                              JOIN Chores ch
-                                ON cl.type = ch.id
-                              JOIN Rooms rm
-                                ON ch.room = rm.id
-                              WHERE cl.assignedTo = 1
-                              AND cl.dateAssigned = @myDate
-                              AND cl.completed = 0
-                              ;", new { id = userId, myDate }).ToList();
-                return sql;
-            }
-        }
+        
 
         // Get Single ChoresList 
         public ChoresList GetChoresListById(int ChoresListId)

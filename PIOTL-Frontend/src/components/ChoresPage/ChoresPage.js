@@ -49,6 +49,7 @@ class ChoresPage extends React.Component {
         this.setState({family: data});
       });
   }
+
   choresListUpdate = () => {
     api.apiGet('ChoresList/')
       .then(res => {
@@ -263,7 +264,7 @@ class ChoresPage extends React.Component {
         <div className="have-tasks-container">
           {entireFamily}
         </div>
-        <ChoresForm chores={this.state.chores} family={this.state.family} user={this.state.user} choresList={this.state.choresList} updateChoresList={this.choresListUpdate}/>
+        <ChoresForm chores={this.state.chores} family={this.state.family} user={this.state.user} choresList={this.state.choresList} choresListUpdate={this.choresListUpdate}/>
 
       </div>
     );

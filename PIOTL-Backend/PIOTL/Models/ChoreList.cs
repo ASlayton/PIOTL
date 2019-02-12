@@ -23,6 +23,7 @@ namespace PIOTL.Models
         public int Id { get; set; }
         public int AssignedTo { get; set; }
         public DateTime DateDue { get; set; }
+        public DateTime DateAssigned { get; set; }
         public bool Completed { get; set; }
         public string Room { get; set; }
         public string Type { get; set; }

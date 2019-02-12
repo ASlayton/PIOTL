@@ -81,6 +81,7 @@ class ChoresForm extends React.Component {
         <h1>Add a chore</h1>
         <form action="">
           <Calendar
+            calendarType="US"
             onChange={this.onChange}
             value={this.state.date}
           />
@@ -88,10 +89,12 @@ class ChoresForm extends React.Component {
           <input type="text" value={moment(this.state.date).format('MM-DD-YYYY')} readOnly />
           <label htmlFor="choreDropdown">Select Chore:</label>
           <select name="choreDropdown" onChange={this.choreChange}>
+            <option hidden>Select chore</option>
             {options}
           </select>
           <label htmlFor="familyMember">Family Member Name:</label>
           <select name="familyMember" onChange={this.famChange}>
+            <option hidden>Select family member</option>
             {members}
           </select>
           <button onClick={this.assignChore}>Submit</button>

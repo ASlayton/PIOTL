@@ -15,6 +15,7 @@ class PastDue extends React.Component {
 
   componentDidUpdate = () => {
     if (!this.props.user || this.state.Chores.length) return;
+
     api.apiGet('ChoresList/ChoresListByUser/' + this.props.user.id)
       .then(res => {
         const currentChores = [];
@@ -26,6 +27,7 @@ class PastDue extends React.Component {
         this.setState({Chores: currentChores});
       })
       .catch((err) => {
+        console.error('There was an error in retrieving past due chores.', err);
       });
   }
 
@@ -40,6 +42,7 @@ class PastDue extends React.Component {
   }
 
   updateChore = (id, e) => {
+    e.stopPropagation();
     const myValue = e.target.checked;
     const newChore = {...this.state.Chores};
     let updatedChore = {};
@@ -57,6 +60,7 @@ class PastDue extends React.Component {
           'familyId': this.props.user.familyId
         };
       };
+      console.log('My updated chore', updatedChore);
       this.pushThisShit(updatedChore);
       this.setState({updatedChore: updatedChore});
     };

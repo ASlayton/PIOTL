@@ -102,6 +102,7 @@ class App extends React.Component {
                   path="/register"
                   authed={this.state.authed}
                   component={Register}
+                  signin={this.signin}
                 />
                 <PublicRoute
                   path="/login"
