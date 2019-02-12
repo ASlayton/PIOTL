@@ -6,6 +6,7 @@ import ToDoWeek from '../ToDoWeek/ToDoWeek';
 import PastDue from '../PastDue/PastDue';
 import api from '../../api-access/api';
 import auth from '../../firebaseRequests/auth';
+import moment from 'moment';
 
 // IF SIGNED IN, USER IS DIRECTED HERE
 class Home extends React.Component {
@@ -42,6 +43,8 @@ class Home extends React.Component {
     return (
       <div>
         <div>
+          <h1>Hello, {this.state.user.firstName}</h1>
+          <h2>Today is {moment().format('dddd, MMMM Do YYYY')}</h2>
           <Memo
             user={this.state.user}
             userHandler={this.userHandler}
