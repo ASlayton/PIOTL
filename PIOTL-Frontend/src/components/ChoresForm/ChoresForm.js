@@ -76,6 +76,7 @@ class ChoresForm extends React.Component {
         <option value={member.firstName}>{member.firstName}</option>
       );
     });
+
     return (
       <div>
         <h1>Add a chore</h1>
@@ -95,7 +96,11 @@ class ChoresForm extends React.Component {
           <label htmlFor="familyMember">Family Member Name:</label>
           <select name="familyMember" onChange={this.famChange}>
             <option hidden>Select family member</option>
-            {members}
+            {
+              this.props.user.adult ?
+                {members} :
+                <option value={this.props.user.firstName}>{this.props.user.firstName}</option>
+            }
           </select>
           <button onClick={this.assignChore}>Submit</button>
         </form>
