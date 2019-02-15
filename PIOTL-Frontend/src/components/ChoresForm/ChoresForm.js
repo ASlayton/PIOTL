@@ -98,7 +98,8 @@ class ChoresForm extends React.Component {
             <option hidden>Select family member</option>
             {
               this.props.user.adult ?
-                {members} :
+                members
+                :
                 <option value={this.props.user.firstName}>{this.props.user.firstName}</option>
             }
           </select>

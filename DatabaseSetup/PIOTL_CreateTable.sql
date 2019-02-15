@@ -12,11 +12,7 @@ CREATE TABLE Users
 );
 
 INSERT INTO Users (firstName, lastName, firebaseID, familyId, adult, earned)
-VALUES ('John', 'Smith', 'j4TP93ysDIN8ibQ7oKEBRoPWlhM2', 1, 1, 0),
-	   ('Sarah', 'Smith', '', 1, 1, 0),
-	   ('Marv', 'Smith', '', 1, 0, 0),
-	   ('Joe', 'Smith', '', 1, 0, 0),
-	   ('Annie', 'Smith', '', 1, 0, 0)
+VALUES ('John', 'Smith', 'j4TP93ysDIN8ibQ7oKEBRoPWlhM2', 1, 1, 0)
 
 CREATE TABLE Family
 (
@@ -26,6 +22,18 @@ CREATE TABLE Family
 
 INSERT INTO Family (name)
 VALUES ('Smith Family')
+
+CREATE TABLE VerifyChore
+(
+	id int IDENTITY(1,1) PRIMARY KEY,
+	choreListId int,
+	requestedBy int,
+	familyId int,
+	type int
+);
+
+INSERT INTO VerifyChore (choreListId, requestedBy, familyId, type)
+VALUES (56, 11, 8, 1)
 
 CREATE TABLE Chores
 (
@@ -75,21 +83,7 @@ CREATE TABLE ChoresList
 );
 
 INSERT INTO ChoresList (dateAssigned, dateDue, completed, assignedTo, assignedBy, type, familyId)
-VALUES ('2019-01-01', '2019-02-01', 0, 1, 1, 1, 1 ),
-       ('2019-01-01', '2019-02-07', 0, 1, 2, 2, 1 ),
-	   ('2019-01-01', '2019-02-08', 0, 1, 1, 1, 1 ),
-	   ('2019-01-01', '2019-02-08', 0, 1, 1, 5, 1 ),
-       ('2019-01-01', '2019-02-01', 0, 1, 1, 3, 1 ),
-	   ('2019-01-01', '2019-02-09', 0, 1, 1, 2, 1 ),
-	   ('2019-01-01', '2019-02-01', 0, 1, 1, 1, 1 ),
-       ('2019-01-01', '2019-02-10', 0, 1, 2, 3, 1 ),
-	   ('2019-01-01', '2019-02-01', 0, 1, 1, 1, 1 ),
-	   ('2019-01-01', '2019-02-07', 0, 1, 1, 2, 1 ),
-       ('2019-01-01', '2019-02-01', 0, 1, 1, 1, 1 ),
-	   ('2019-01-01', '2019-02-01', 0, 1, 1, 3, 1 ),
-	   ('2019-01-01', '2019-02-01', 0, 1, 2, 2, 1 ),
-       ('2019-01-01', '2019-02-01', 0, 1, 1, 2, 1 ),
-	   ('2019-01-01', '2019-02-01', 0, 1, 1, 4, 1 )
+VALUES ('2019-01-01', '2019-02-01', 0, 1, 1, 1, 1 )
 
 CREATE TABLE Memos
 (
@@ -161,16 +155,3 @@ CREATE TABLE EventType
 
 INSERT INTO EventType (name)
 VALUES ('Birthday')
-
-
-ALTER TABLE Users ADD FOREIGN KEY (familyId) REFERENCES Family (id);
-ALTER TABLE Chores ADD FOREIGN KEY (room) REFERENCES Rooms (id);
-ALTER TABLE ChoresList ADD FOREIGN KEY (assignedTo) REFERENCES Users (id);
-ALTER TABLE ChoresList ADD FOREIGN KEY (assignedBy) REFERENCES Users (id);
-ALTER TABLE Memos ADD FOREIGN KEY (userId) REFERENCES Users (id);
-ALTER TABLE Messages ADD FOREIGN KEY (sentTo) REFERENCES Users (id);
-ALTER TABLE Messages ADD FOREIGN KEY (sentFrom) REFERENCES Users (id);
-ALTER TABLE Grocery ADD FOREIGN KEY (addedBy) REFERENCES Users (id);
-ALTER TABLE Grocery ADD FOREIGN KEY (type) REFERENCES GroceryType (id);
-ALTER TABLE Events ADD FOREIGN KEY (type) REFERENCES EventType (id);
-ALTER TABLE Events ADD FOREIGN KEY (assignedTo) REFERENCES Users (id);

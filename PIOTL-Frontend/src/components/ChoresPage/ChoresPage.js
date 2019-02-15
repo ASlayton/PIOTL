@@ -64,9 +64,10 @@ class ChoresPage extends React.Component {
     const myValue = e.target.checked;
     const newChore = {...this.state.choresList};
     let updatedChore = {};
+    let newType = 0;
     for (let i = 0; i < Object.keys(newChore).length; i++) {
       if (newChore[i].id === id) {
-        const newType = this.getTypeId(newChore[i].type);
+        newType = this.getTypeId(newChore[i].type);
         updatedChore = {
           'id': newChore[i].id,
           'dateAssigned': moment().format('YYYY-MM-DD h:mm A'),
@@ -81,6 +82,25 @@ class ChoresPage extends React.Component {
     };
     this.pushThisShit(updatedChore);
     this.setState({updatedChore: updatedChore});
+    if (!this.state.user.adult && e.target.checked) {
+      this.askForVerification(id, newType);
+    };
+  };
+
+  askForVerification = (id, choreId) => {
+    const choreToVerify = {
+      choreListId: id,
+      requestedBy: this.state.user.id,
+      familyId: this.state.user.familyId,
+      type: choreId
+    };
+    api.apiPost('verifyChore', choreToVerify)
+      .then((res) => {
+        console.log('Chore has been submitted to be verified.');
+      })
+      .catch((err) => {
+        console.error('There was an error in posting VerifyChore: ', err);
+      });
   };
 
   pushThisShit = (myObject) => {
@@ -94,6 +114,16 @@ class ChoresPage extends React.Component {
   };
 
   getTypeId = (typeName) => {
+    let myValue = 0;
+    this.state.chores.forEach((chore) => {
+      if (chore.name === typeName) {
+        myValue = chore.id;
+      }
+    });
+    return myValue;
+  };
+
+  getChoreName= (typeName) => {
     let myValue = 0;
     this.state.chores.forEach((chore) => {
       if (chore.name === typeName) {
